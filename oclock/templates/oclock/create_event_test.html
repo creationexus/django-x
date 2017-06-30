@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en_US" class="no-js">
+  <head>
+    <title>O'Clock - Create</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--<link rel="stylesheet" type="text/css" href="/static/css/oclock.css" />-->	
+    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css" media="screen">
+    <!--<link rel="stylesheet" type="text/css" media="all" href="/static/css/jsDatePick_ltr.min.css" />-->
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="/static/css/datepicker.css" /> -->
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/static/css/datepicker.css" />
+    <style>
+    .up_a{
+      padding:20px;
+      margin-top:40px;
+      height:100%;
+    }
+    .up_b{
+      height:100%;
+      border:4px dashed #CCC;
+      border-radius:7px;
+      display:block;
+      background:rgba(0,0,0,0.3);
+    }
+    #fileset{
+      height:100%;
+    }
+    #filedrag{
+      display: none;
+      font-weight: bold;
+      text-align: center;
+      color: #555;
+      border: 4px dashed #999;
+      border-radius: 7px;
+      cursor: default;
+      height:100%;
+    }
+
+    #filedrag.hover{
+      color: #f00;
+      border-color: #f00;
+      border-style: solid;
+      box-shadow: inset 0 3px 4px #888;
+    }
+    div#header{
+    color: #FFFFFF;
+    font-size:24px;
+    padding:10px;
+    text-align:center;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:999;
+    width:100%;
+    background-color:rgba(253,70,74,1);
+    padding:0;
+    min-width:490px;
+    }
+    div#header-title{
+    float:left;height:25px;padding:3px 0 11px 10px;
+    }
+    div#header-menu{
+    float:right;height:25px;padding:5px 10px;	
+    }
+    label#header-menu-user-name{
+    height:30px;vertical-align:top;font-size:18px;padding-left:5px;padding-right:5px;
+    }
+    img#header-menu-avatar{
+    width:30px;height:30px;border-radius:20%;-webkit-border-radius:20%;-moz-border-radius:20%;
+    }
+    div#header-search{
+    float:right;height:25px;	
+    }
+    #header-search-input{
+    width: 150px; padding-right: 15px; background-color: rgb(232, 237, 241);font-size:16px;
+    }
+    img#header-login{
+    width:130px;height:30px;
+    }
+    /*-------------
+    SEARCH
+    -------------*/
+    fieldset{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    }
+    #searchForm fieldset {
+    width:240px;
+    position:relative;
+    display:block;
+    }
+    div.input {
+    width:120px;
+    padding:0 15px 0 15px;
+    border-radius:20px;
+    border:1px solid #c6d2db;
+    border-top:1px solid #b4c1cb;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.08);
+    float:right;
+    background:#e8edf1;
+    }
+    div.input.focus {
+    border:1px solid #9ecbe2;
+    box-shadow:0 0 6px #abdcff, inset 0 1px 2px rgba(0,0,0,0.08);
+    }
+    fieldset #search{
+    display: none;
+    }
+    fieldset input #s{
+    color: rgb(180, 189, 196);font-size:16px;
+    }
+    input#s {
+    width:100%;
+    border:0;
+    border-radius:20px;
+    background:transparent;
+    height:16px;
+    color:#b4bdc4;
+    text-shadow:0 1px 1px #fff;
+    }
+    input#s:focus {
+      outline:none;
+    }
+    input#searchSubmit {
+      width:24px;
+      height:24px;
+      text-indent:-9999px;
+      overflow:hidden;
+      background:url(/static/images/search-icon.png) no-repeat;
+      border:0;
+      position:absolute;
+      top:3px; right:13px;
+      z-index:5;
+      display:none;
+      cursor:pointer;
+    }
+    body{
+    font-family: "Open Sans", "Arial", "Helvetica", sans-serif;
+    font-size: 12px;
+    height: 100%;
+    }
+    .align-center{
+      text-align: center;
+    }
+    div#f1, div#f2, div#f3{
+      display: table;
+      height: 100%;
+      text-align: center;
+      vertical-align: middle;
+      width: 100%;
+    }
+    #cr_el{
+      color: #FFFFFF;
+      height: 100%;
+      width: 100%;
+    }
+    #se_el{
+      display: table;
+      height: 90%;
+      margin: 0;
+      padding: 0;
+      top: 0;
+      width: 100%;
+    }
+    /*html, body, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, textarea, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, address, article, aside, audio, canvas, command, datalist, details, dialog, figure, figcaption, footer, header, hgroup, keygen, mark, meter, menu, nav, progress, ruby, section, time, video{
+    margin: 0%;
+    border: 0px;
+    padding: 0%;
+    outline: 0px;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    }*/
+    a{
+    text-decoration: none;
+    }
+    #tit{ 
+      min-width:200px;
+      width:60%;
+      height:60px;
+      line-height:60px;
+      background-color:transparent;  
+      border-style:solid;  
+      border-width:0px 0px 2px 0px;  
+      border-color:white; 
+      outline:0;
+      color:white;
+      font-size:48px;
+      text-align: center;
+      font-weight: bold;
+      -webkit-transition:all 0.30s ease-in;
+      -moz-transition:all 0.30s ease-in;
+      -ms-transition:all 0.30s ease-in;
+      -o-transition:all 0.30s ease-in;
+    }
+    #tit:focus{border-color:red;}
+    #t_s{
+      width:360px;
+      min-width:300px;
+      overflow:hidden;
+      background-color:transparent;
+      border: 1px solid #ccc;
+      border-style:solid;
+      border-width:0px 0px 2px 0px;
+      border-color:white;
+      color:white;
+      font-size:32px;
+      text-align: center;
+    }
+    #t_s option{
+      margin:40px;
+      background: rgba(0,0,0,0.3);
+      color:#fff;
+    }
+    #t_s option:not(:checked) { 
+      background-color:white; 
+      color:#000;
+    }
+    #t_s:hover{
+      border-color:red;
+    }
+    #b_s{
+      background-color:rgba(253,70,74,1);
+      color: white;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      font-family: inherit;
+      font-size:28px;
+	  font-weight:bold;
+      padding: .5em 1em;
+      border: 1px solid #999;
+      border: 0 rgba(0,0,0,0);
+      text-decoration: none;
+      border-radius: 2px;
+      width:100%;
+      padding:12px;
+      margin-top:40px;
+    }
+    #dt{
+      width:140px;
+      font-size:22px;
+      text-align:center;
+      border-radius:4px;
+      padding:.5em 1em;
+      text-align:center;
+      margin-right:20px;
+      -webkit-transition: all 1.30s ease-in;
+      -moz-transition: all 1.30s ease-in;
+      -ms-transition: all 1.30s ease-in;
+      -o-transition: all 1.30s ease-in;
+    }
+    #tm{
+      width:70px;
+      font-size:22px;
+      border-radius:4px;
+      padding:.5em 1em;
+      -webkit-transition: all 1.30s ease-in;
+      -moz-transition: all 1.30s ease-in;
+      -ms-transition: all 1.30s ease-in;
+      -o-transition: all 1.30s ease-in;
+    }
+    .i_mv{
+		width:40px;
+		height:40px;
+		margin:1px;
+    }
+    .menu_list{
+		background:#FFF;
+		width:150px;
+		list-style:none;
+		position:absolute;
+		z-index:4;
+		display:none;
+		text-align:left;
+		font-size:14px;
+		color:black;
+		font-weight:100;
+		padding:10px 0;
+		top:43px;
+		text-align:left;
+		right:10px;
+		-webkit-box-shadow:0 3px 8px;
+		border-radius:4px;
+    }
+    #lst li{
+	   -webkit-transition:all 0.30s ease-in;
+	   -moz-transition:all 0.30s ease-in;
+	   -ms-transition:all 0.30s ease-in;
+	   -o-transition:all 0.30s ease-in;
+	   padding:5px;
+	   padding-left:10px;
+    }
+    #lst li:hover{
+      background:#E33;
+    }
+    #lst li a{
+      display:block;
+    }
+    .hh{
+    	padding:.5em 1em;
+    	margin:100px 15px 0 15px;
+    	background-color:transparent;
+		border-style:solid;
+		border-width:0px 0px 2px 0px;
+		border-color:white;
+		outline:0;
+		font-size: 20px;
+		color:white;
+		text-align:center;
+		font-weight:bold;
+		-webkit-transition:all 0.30s ease-in;
+		-moz-transition:all 0.30s ease-in;
+		-ms-transition:all 0.30s ease-in;
+		-o-transition:all 0.30s ease-in;
+    }
+    .hh:hover{
+    	border-color:red;
+    }
+    #f_t{
+    	display:block;
+		width:350px;
+		margin:40px auto 0 auto;
+    }
+    </style>
+  	<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+	for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+	mixpanel.init("87c672a0b3c66ee03ac32ddf4cc0b20b");</script><!-- end Mixpanel -->
+  </head>
+  <body style="margin:0;">
+      <div id="header">
+      <div id="header-title"><span style="vertical-align:sub;color:white;"><a href="/" style="color:white;">O'Clock</a></span></div>
+      <div id="header-menu">
+		<span id="header-menu-user-name">{{ users_name }}</span>
+		<a id="hma" href="javascript:void(0)"><img src="{{ users_path_web_avatar }}" id="header-menu-avatar"/></a>
+		<ul class="menu_list" id="lst">
+            <li><a href="/user/{{ users_name_id }}/"><img src="/images/oclock.png" style="width: 20px;height: 20px;vertical-align: bottom;">My Clocks</a></li>
+            <li><a href="#"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;">Drafts</a></li>
+            <li style="background:#E77;"><a href="/u/out">Log Out</a></li>
+	 	</ul>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <article id="cr_el" class="black-opa align-center">
+      <section id="se_el" style="height:100%;">
+	<div id="f1" style="background-color:#EEE">
+	 <form id="dx1" class="up_a">
+	  <fieldset id="fileset">
+	    <input type="file" id="fileselect" name="fileselect" style="display: none;" />
+	    <div id="filedrag">
+	    <div style="width:100%;text-align:right;"><div><a href="/"><img src="/images/x.png" /></a><br/><a id="skp" href="javascript:void(0)"><span style="margin:8px;color:#888;">skip&gt;&gt;</span></a></div></div>
+	    <h1 style="color:#AAA;">Drop the image of your clock</h1><br />
+	    <span style="font-size:18px;font-weight:100;">Or</span><span for="fileselect"><a href="javascript:void(0)" style="color:rgba(253,70,74,1);font-size: 18px;font-weight: 100;" onclick="document.getElementById('fileselect').click();"> browse </a></span><span style="font-size: 18px;font-weight:100;">on your computer.</span>
+	    </div>
+	  </fieldset>
+	  </form>
+	</div>
+	<div id="f2" style="display:none;">
+	  <form id="dx2" class="up_a">
+	    <div class="up_b" >
+	      <div style="width:100%;text-align:right;">
+		<div><!--<a href="/"><img src="/images/x.png" /></a>--></div><br />
+		<div><a id="bf_2" href="javascript:void(0)"><img class="i_mv" src="/images/pv.png" /></a></div><br />
+		<div><a id="nx_2" href="javascript:void(0)"><img class="i_mv" src="/images/nx.png" /></a></div>
+	      </div>
+	      <input id="tit" type="text" maxlength="200" placeholder="Insert the title" size="1">
+	      <br />
+		  <input type="text" id="hs1" maxlength="15" class="hh" placeholder="insert hashtag"/>
+		  <input type="text" id="hs2" maxlength="15" class="hh" placeholder="insert hashtag"/>
+		  <input type="text" id="hs3" maxlength="15" class="hh" placeholder="insert hashtag"/>
+	    </div>
+	  </form>
+	<div id="progress" style="display:none;"></div>
+	</div>
+	<div id="f3" style="display:none;">
+	  <form id="up" class="up_a" action="/in/new" method="POST" enctype="multipart/form-data">
+	    <div class="up_b" >
+	      <div style="width:100%;text-align:right;">
+		<div><!--<a href="/"><img src="/images/x.png" /></a>--></div><br />
+		<div><a id="bf_3" href="javascript:void(0)"><img class="i_mv" src="/images/pv.png" /></a></div><br />
+	      </div>
+	      <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000000" />
+	      <select id="t_s" type="text" onchange="s_val()" placeholder="Select the type of clock" size="1">
+			<option>Select the type of clock</option>
+			<option value="1">chronometer</option>
+			<option value="2">countdown</option>
+	      </select>
+	      <div id="f_t" style="display:none;">
+			<p style="font-size:18px;text-align:left;margin:5px;" ><span id="fr_t"></span></p>
+			
+			<input type="text" id="dt" class="span2" size="16" value="" style="display:inline-block;" data-date-format="yyyy-mm-dd" data-date="dateValue: Customer.DateOfBirth" data-date-viewmode="years" placeholder="2023-11-11" />
+			
+			<input type="text" id="tm" value="" maxlength="5" placeholder="11:23"/>
+			<br />
+			<input type="button" id="b_s" value="Create Clock"/>
+			<div id="l_i" style="display:none;"><img src="/static/images/preloader.gif"/></div>
+	      </div>
+	      <div id="messages" style="background-color:black;color:white;display:none;"></div>
+	    </div>
+	  </form>
+	<div id="progress" style="display:none;"></div>
+	</div>
+      </section>
+    </article>
+    
+   <div class="preloader"></div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+   <script src="/js/bootstrap-datepicker.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+   <!--<script type="text/javascript" src="/js/jsDatePick.min.1.3.js"></script>-->
+   <!-- Latest compiled and minified JavaScript -->
+   <!--  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+   <!-- <script type="text/javascript" src="/js/bootstrap-datepicker.js"></script> -->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script> -->
+<script>
+var f_im,lat=0,lon=0,country="";
+function s_val(){
+  d=document.getElementById("t_s").value;
+  document.getElementById("f_t").style.display='block';
+  if(d==1){
+    document.getElementById("fr_t").innerHTML="When it was started";
+  }else if(d==2){
+    document.getElementById("fr_t").innerHTML="When will it end";
+  }
+}
+(function(){
+  function $id(id) {
+    return document.getElementById(id);
+  }
+  function Output(msg) {
+    var m = $id("messages");
+    m.innerHTML = msg + m.innerHTML;
+  }
+  function FileDragHover(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.target.className=(e.type=="dragover"?"hover":"");
+  }
+  function FileSelectHandler(e) {
+    //cancel event and hover styling
+    FileDragHover(e);
+    //fetch FileList object
+    var file=e.target.files||e.dataTransfer.files;
+    // process all File objects
+    f_im=file[0];
+    ParseFile(f_im);
+  }
+
+  function ParseFile(file) {
+    cr_el=$id("cr_el");
+    /*Output(
+      "<p>File information: <strong>" + file.name +
+      "</strong> type: <strong>" + file.type +
+      "</strong> size: <strong>" + file.size +
+      "</strong> bytes</p>"
+    );*/
+    if (file.type.indexOf("image")==0){
+      var reader = new FileReader();
+      reader.onload=function(e){
+	/*Output(
+	  "<p><strong>" + file.name + ":</strong><br />" +
+	  '<img src="' + e.target.result + '" /></p>'
+	);*/
+	cr_el.style.background="url('"+e.target.result+"') no-repeat center center";
+	cr_el.style.backgroundSize="cover"
+	$id("f1").style.display='none';
+	$id("f2").style.display='table';
+	$id("dx2").style.height=(window.innerHeight-100)+"px";
+    }
+    reader.readAsDataURL(file);
+    }
+    if (file.type.indexOf("text") == 0) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+	/*Output(
+	  "<p><strong>" + file.name + ":</strong></p><pre>" +
+	  e.target.result.replace(/</g, "&lt;").replace(/>/g, "&gt;") +
+	  "</pre>"
+	);*/
+      }
+      reader.readAsText(file);
+    }
+  }
+  function Init() {
+    var fileselect=$id("fileselect"),
+    filedrag=$id("filedrag"),
+    submitbutton=$id("submitbutton");
+    fileselect.addEventListener("change",FileSelectHandler,false);
+    var xhr=new XMLHttpRequest();
+    if (xhr.upload){
+      filedrag.addEventListener("dragover",FileDragHover,false);
+      filedrag.addEventListener("dragleave",FileDragHover,false);
+      filedrag.addEventListener("drop",FileSelectHandler,false);
+      filedrag.style.display="block";
+    }
+  }
+  if (window.File&&window.FileList&&window.FileReader) {
+    Init();
+  }
+})();
+window.onload=function(){
+  hl=document.getElementsByTagName("body")[0];
+  hl.style.width=window.innerWidth+"px";
+  hl.style.height=window.innerHeight+"px";
+  document.getElementsByTagName("form")[0].style.height=(window.innerHeight-100)+"px";
+  var b_s=$id("b_s"),
+  bf_2=$id("bf_2"),
+  bf_3=$id("bf_3"),
+  nx_2=$id("nx_2"),
+  skp=$id("skp");
+  skp.onclick=function(){
+  	cr_el.style.background="";
+  	cr_el.style.backgroundColor="#333"
+  	$id("f1").style.display='none';
+	$id("f2").style.display='table';
+	$id("dx2").style.height=(window.innerHeight-100)+"px";
+  };
+  hl.onclick=function(e){
+   dq=$id("lst").style.display
+   if(e.target==document.getElementById("header-menu-avatar")){
+   	   if(dq=="none"||dq==""){
+	    $id("lst").style.display='table';
+	   }else{
+	    $id("lst").style.display='none';
+	   }
+   }else{
+   if(dq!="none"&&dq!=""){
+    $id("lst").style.display='none';
+   }
+   }
+  }
+  bf_2.onclick=function(){
+    $id("f1").style.display='table';
+    $id("f2").style.display='none';
+    $id("f3").style.display='none';
+    $id("dx1").style.height=(window.innerHeight-100)+"px";
+    $id("fileselect").value=""
+  };
+  bf_3.onclick=function(){
+    $id("f1").style.display='none';
+    $id("f2").style.display='table';
+    $id("f3").style.display='none';
+    $id("dx2").style.height=(window.innerHeight-100)+"px";
+  };
+  nx_2.onclick=function(){
+  	if($id("tit").value.trim()==""){
+  		$id("tit").style.backgroundColor="red";
+  	}else{
+	    $id("f1").style.display='none';
+	    $id("f2").style.display='none';
+	    $id("f3").style.display='table';
+	    $id("up").style.height=(window.innerHeight-100)+"px";
+    }
+  };
+  b_s.onclick=function(){
+  	$id("dt").style.backgroundColor="white";
+	$id("tm").style.backgroundColor="white";
+	$id("tit").style.backgroundColor="transparent";
+	$id("hs1").style.backgroundColor="transparent";
+	$id("hs2").style.backgroundColor="transparent";
+	$id("hs3").style.backgroundColor="transparent";
+  	$id("b_s").disabled=true;
+    b(f_im);
+    $id("l_i").style.display='block';
+  };
+  function $id(id) {
+    return document.getElementById(id);
+  }
+  function c(xhr,file){
+  	  // create progress bar
+      //var o = $id("progress");
+      //var progress = o.appendChild(document.createElement("p"));
+      //progress.appendChild(document.createTextNode("upload " + file.name));
+      // progress bar
+      xhr.upload.addEventListener("progress",function(e){
+	      var pc=parseInt(100-(e.loaded/e.total*100));
+	      if(pc>0){
+	      	$id("b_s").value="Create Clock ("+pc+"%)";
+	      }else{
+	      	$id("b_s").value="Create Clock";
+	      }
+	      //progress.style.backgroundPosition = pc + "% 0";
+      },false);
+      // file received/failed
+      xhr.onreadystatechange=function(e){
+	  if (xhr.readyState==4){
+	  	if(xhr.status==201){
+	  		sel=document.getElementById("t_s");
+	  		mixpanel.track("clock created",{
+	  			"clock_id":xhr.responseText,
+			    "type":sel.options[sel.selectedIndex].text,
+			    "from":"new",
+			    "plan":"regular"
+			});
+	  		window.location.href="/"+xhr.responseText;
+	  	}else{
+	  		console.log(xhr.responseText);
+	  	 	oo=Object.keys(JSON.parse(xhr.responseText))
+	  	 	for(i=0;i<oo.length;i++){
+	  	 		if(oo[i]=="status"){
+	  	 			$id("dt").style.backgroundColor="red";
+	  	 			$id("dt").value="";
+	  	 			$id("tm").style.backgroundColor="red";
+	  	 			$id("tm").value="";
+	  	 		}else{
+	  	 			$id(oo[i]).style.backgroundColor="red";
+	  	 			$id(oo[i]).value="";
+	  	 		}
+	  	 	}
+	  		$id("messages").innerHTML=xhr.responseText;
+	  		$id("b_s").disabled=false;
+	  		$id("l_i").style.display='none';
+	  	}
+		/*progress.className=(xhr.status==200?"success":"failure");*/
+	  }
+      };
+      var formData=new FormData();
+      if(file!==undefined){
+      	formData.append("fileselect",file);
+      	xhr.open("POST",$id("up").action,true);
+      	xhr.setRequestHeader("X_FILENAME",file.name);
+      }else{
+      	xhr.open("POST",$id("up").action,true);
+      }
+      formData.append("dt",$id("dt").value);
+      formData.append("tm",$id("tm").value);
+      formData.append("tit",$id("tit").value);
+      formData.append("tp",$id("t_s").value);
+      formData.append("hs1",$id("hs1").value);
+      formData.append("hs2",$id("hs2").value);
+      formData.append("hs3",$id("hs3").value);
+      formData.append("lat",lat.toString());
+      formData.append("lon",lon.toString());
+      formData.append("country",country.toString());
+      xhr.send(formData);
+  }
+  function b(file) {
+    if (location.host.indexOf("sitepointstatic")>=0)return;
+    var xhr=new XMLHttpRequest();
+    if(xhr.upload&&file===undefined){
+    	c(xhr,file);
+    }else if(xhr.upload&&(file.type=="image/jpeg"||file.type=="image/png"||file.type=="image/bmp")&&file.size<=$id("MAX_FILE_SIZE").value){
+      	c(xhr,file);
+    }
+  }
+  
+  var nowTemp=new Date();
+  var now=new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  $('#dt').datepicker();
+  
+  /*new JsDatePick({
+	  useMode:2,
+	  target:"dt",
+	  dateFormat:"%Y-%m-%d",
+	  imgPath:"/images/cal/"
+	  selectedDate:{				This is an example of what the full configuration offers.
+		  day:5,						For full documentation about these settings please see the full version of the code.
+		  month:9,
+		  year:2006
+	  },
+	  yearsRange:[1978,2020],
+	  limitToToday:false,
+	  cellColorScheme:"beige",
+	  dateFormat:"%m-%d-%Y",
+	  imgPath:"img/",
+	  weekStartDay:1
+  });*/
+};
+google.maps.event.addDomListener(window,'load',initialize);
+function initialize(){
+  geocoder=new google.maps.Geocoder();
+  // Try HTML5 geolocation
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+       lat=position.coords.latitude;
+       lon=position.coords.longitude;
+       var pos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        geocoder.geocode({'latLng': new google.maps.LatLng(lat,lon)},function(results,status){
+            if (status==google.maps.GeocoderStatus.OK&&results.length){
+                results=results[0].address_components;
+				country=results[6]['short_name'];
+            }else{}
+        });
+       },function(){
+       handleNoGeolocation(true);
+    });
+  }else{
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+function handleNoGeolocation(errorFlag) {
+  if(errorFlag){
+    alert('Error: The Geolocation service failed.');
+  }else{
+    alert('Error: Your browser doesn\'t support geolocation.');
+  }
+}
+</script>
+</body>
+</html>

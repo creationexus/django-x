@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en_US">
+	<head>
+		<title>Login _ O'Clock</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+
+		<link rel="apple-touch-icon" href="/static/images/icon.png"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/oclock.css" />
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/login_signup.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/data-progress.min.css" />
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	</head>
+	<body id="main" >
+	
+	<section id="content">
+			<header><h2><a href="/">O'Clock</a></h2></header>
+			<div id="main_container">
+				<div class="container">
+					<form method="post" action="/user/login" class="form-signin" style="display: block; top: 0px;">
+						<h2 class="form-login-heading">sign in with...</h2>
+						<div class="social-signup">
+						<a class="facebook-signup" href="/user/facebook/login"></a>
+						</div>
+						<br />
+						<div class="line"></div>
+						<h2 class="form-login-heading-second">or sign in with your email address</h2>
+						<div class="line"></div>
+						<input type="text" class="form-control" placeholder="Email" id="email" name="email" autofocus="">
+						<input type="password" class="form-control" placeholder="Password" id="password" name="password">
+						<input type="hidden" class="form-control" id="redirect" name="redirect" value="">
+						<button class="btn btn-lg btn-block btn-color" type="submit">Login</button>
+						<a href="/user/password_reset" style="width:100%; text-align:center; color:#fff; display:block;">Forgot Password?</a>
+					</form>
+					<h1>{{ status }}</h1>
+					<div id="overlay" style="display: block; height: 300px;"></div>
+				</div>
+			</div>
+		</section>
+		<div id="footer">© 2014 oClock</div>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/backstretch.js"></script>
+		<script type="text/javascript" src="/js/login.js"></script>
+		<script type="text/javascript" src="/js/nprogress.js"></script>
+		<script type="text/javascript" src="/js/data_process.js"></script>
+	</body>
+</html>

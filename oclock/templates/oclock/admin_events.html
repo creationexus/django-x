@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Administrator</title>
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/oclock-css/jquery.dataTables.css">
+<link rel="stylesheet" href="https://storage.googleapis.com/oclock-css/messi.min.css" />
+<script type="text/javascript" language="javascript" src="https://storage.googleapis.com/oclock-javascript/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="https://storage.googleapis.com/oclock-javascript/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="https://storage.googleapis.com/oclock-javascript/messi.min.js"></script>
+</head>
+<body>
+<table id="t_x" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>T&iacute;tulo</th>
+                <th>T&iacute;tulo URL</th>
+                <th>Estado</th>
+                <th>Borrado</th>
+                <th>Orden</th>
+                <th>Pa&iacute;s</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+ 
+        <tfoot>
+            <tr>
+                <th>T&iacute;tulo</th>
+                <th>T&iacute;tulo URL</th>
+                <th>Estado</th>
+                <th>Borrado</th>
+                <th>Orden</th>
+                <th>Pa&iacute;s</th>
+                <th>Acciones</th>
+            </tr>
+        </tfoot>
+        <tbody>
+		 {% for event in r %}
+		 <tr>				 
+		    <td>{{ event.1 }}</td>
+		    <td>{{ event.6 }}</td>
+		    <td>{% if event.5 < 0 %}Terminado{% else %}{{ event.5 }}{% endif %}</td>
+		    <td>{% if event.2 == 1 %}Sí{% else %}No{% endif %}</td>
+		    <td>{{ event.3 }}</td>
+		    <td>{{ event.4 }}</td>
+		    <td>
+		    	<a id="{{ event.0 }}" onclick="edit({{ event.0 }})" class="edit" href="javascript:void(0)"><img src="http://storage.googleapis.com/oclock-images/edit.png"/></a>
+		    	{% if event.2 == 0 %}<a id="{{ event.0 }}" onclick="dx({{ event.0 }})" class="delete" href="javascript:void(0)"><img src="http://storage.googleapis.com/oclock-images/delete.png"/></a>{% endif %}
+		    </td>
+		 </tr>    
+		 {% endfor %}
+        </tbody>
+    </table>
+<script type="text/javascript">
+function edit(x){
+	$.ajax({
+        type:'get',
+        url:'/admin/events/edit/'+x+'/',
+        data:{},
+        success:function(r){
+        	new Messi(r,{title:'Edit Event',callback:function(val){location.reload();}});
+        	$(".form").submit(function(){
+      		  	$.ajax({
+      			     type:'post',
+      			     url:'/admin/events/edit/'+$(this).attr('id')+'/',
+      			     data:{'e_title':$('#tit').val(),'e_sort':$('#sort').val(),'e_cc':$('#cc').val()},
+      			     success:function(r){
+      			  	   console.log("Submitted");
+      			  	   location.reload();
+      			     }
+      		    });
+      		 	return false;
+      		});
+        }
+ 	});
+}
+function dx(x){
+$.ajax({
+  type:'get',
+  url:'/admin/events/delete/'+x+'/',
+  data:{},
+  success:function(r){
+	location.reload();
+  }
+});
+}
+$(document).ready(function(){
+    $('#t_x').DataTable();
+    /*$('.edit').on('click',function(){
+    	Messi.load('/admin/events/edit/'+$(this).attr('id')+'/',{title:'Edit Event',callback:function(val){location.reload();}});
+    });
+    $('.delete').on('click',function(){
+    	console.log('delete');
+    });*/
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+/* Reset the stylesheet */
+html, body, /*div,*/ span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, textarea, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+address, article, aside, audio, canvas, command, datalist, 
+details, dialog, figure, figcaption, footer, header, hgroup,
+keygen, mark, meter, menu, nav, progress,
+ruby, section, time, video {
+	margin: 0%;
+	border: 0px;
+	padding: 0%;
+	outline: 0px;
+	font-size: 100%;
+	font-style: inherit;
+	font-weight: inherit;
+	font-family: inherit;
+	vertical-align: baseline;
+	/*box-sizing: border-box;*/
+}
+/* HTML5 elements that are blocks */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+    margin: 0;
+}
+strong{font-weight: bold;}
+/* Normal HTML */
+ol, ul {list-style: none;}
+a{text-decoration: none;}
+/********/
+html, body{
+font-family: "Open Sans", "Arial", "Helvetica", sans-serif;
+font-size: 12px;
+height: 100%;
+}
+section#content{height:100%;width:100%;float:left;background:transparent url(/images/bg_content.png) repeat;background-color:rgba(0,0,0,0.3);}
+/* HEADER */
+header{
+top:0;
+position:fixed;
+background-color: #000;
+padding: 0.5% 1%;
+text-align: center;
+width: 100%;
+}
+header h1 a{
+color: #FFFFFF;
+font-size: 2em;
+font-weight: 700;
+}
+header h1 a:hover{
+color: #EEEEEE;
+}
+header .download{
+float: right;
+color: white;
+margin-top: -26px;
+}
+/* FIN HEADER */
+article{
+color: #FFFFFF;
+height:100%;
+width:100%;
+}
+article section{
+display: table;
+height: 90%;
+margin: 0; padding: 0;
+top: 0;
+width: 100%;
+}
+article section div#s_bo{
+display: table-cell;
+height: 100%;
+text-align: center;
+vertical-align: middle;
+width: 100%;
+}
+article section div h2{
+font-size: 3em;
+font-weight: 700;
+text-transform: uppercase;
+}
+article section div span{
+	font-size: 2.5em;
+	font-weight: 700;
+}
+article ul.clocks{
+	/*padding: 4px 2.5px;*/
+}
+article div.clocks{
+	display: inline;
+	float: left;
+	width: 20%;
+}
+article div.clocks img{
+	position: relative;
+	width: 100%;
+}
+article ul.clocks li div{
+background-color: rgba(0,0,0,0.5);
+box-sizing: border-box;
+color: #FFFFFF;
+display: none;
+height: 195px;
+padding: 5% 1%;
+position: absolute;
+text-align: center;
+width: 248px;
+z-index: 2;
+}
+article ul.clocks li div h2{
+	font-size: 1.25em;
+	font-weight: 700;
+}
+article ul.clocks li div ul.social{
+	margin-top: 10px;
+	padding: 0px!important;
+}
+article ul.clocks li div ul.social li{
+	display: inline-table;
+	height: 25px;
+	width: 25px;
+}
+article ul.clocks li div ul.social li a{
+	background-color: #34495E;
+	border-radius: 2.5px;
+	color: #FFFFFF;
+	font-weight: 700;
+	padding: 5px 10px;
+}
+article ul.clocks li div ul.social li a:hover{
+	background-color: #22313F;
+}
+footer{
+	bottom: 0px;
+	position: fixed;
+	width: 100%;
+}
+footer ul{width: 100%;}
+footer ul#footer li.b_g{display:inline-block;margin-right:-3px;width:33.3%;}
+footer ul#footer li a{
+background-color: #22313F;
+color: #FFFFFF;
+display: inline-block;
+font-size: 1.25em;
+font-weight: 700;
+padding: 10px 5%;
+text-align: center;
+width: 100%;
+box-sizing:border-box;
+}
+footer ul#footer li a:hover{
+	background-color: #34495E;
+}
+footer ul#footer li ul{display:none;}
+#rd_x{width:240px;}
+/* CLASES */
+.pickled{background-color: #34495E;}
+.black-opa{/*background-color: rgba(0,0,0,0.3);*/}
+.align-center{text-align: center;}

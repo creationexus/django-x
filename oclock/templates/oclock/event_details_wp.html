@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en_US">
+	<head>
+		<title>{{ event.clock_name }}</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+
+		<link rel="apple-touch-icon" href="/static/images/icon.png"/>
+		<link rel="stylesheet" type="text/css" href="/static/css/oclock.css" />
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="/js/backstretch.js"></script>
+		<script type="text/javascript" src="/js/countdown.js"></script>
+
+		<script type="text/javascript">
+			$(function() {
+				$('.red-social').hover(
+					function() {
+						$(".opcion-social").fadeIn().css("display","block");
+					}, function() {
+						$(".opcion-social").fadeOut("slow").css("display","none");
+					}
+				);
+				$(".main").backstretch("{{ event.clock_simple_image_url }}");
+			});
+		</script>
+	</head>
+	<body class="main" >
+	<section id="content">
+			<header>
+				<h1>
+					<a href="index.html">
+						O'Clock
+					</a>
+				</h1>
+			<!-- <h1 class="download"> Descarga la App </h1> -->
+			</header>
+			<article class="black-opa align-center">
+				<section>
+					<div>
+						<h2>{{ event.clock_name }}</h2>
+						<span style="display:none;" id="crono_type">{{ event.clock_type_str }}</span>
+						<span style="display:none;" id="unixtime_coming_0">{{ event.seconds }}</span>
+						<span onload='timer(0)' id="timer_coming_0"></span>
+					</div>
+				</section>
+			</article>
+			<footer>
+				<ul id="footer">
+					<li>
+						<a href="#">
+							FOLLOW
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							LIKE ({{ event.clock_likes }})
+						</a>
+					</li>
+					<li class="red-social">
+						<ul class="opcion-social">
+							<li>
+								<a href="#">
+									Twitter
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									Facebook
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									Google+
+								</a>
+							</li>
+						</ul>
+						<a href="#">
+							SHARE
+						</a>
+					</li>
+				</ul>
+			</footer>
+		</section>
+	</body>
+</html>

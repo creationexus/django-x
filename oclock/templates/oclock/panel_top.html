@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TOP {{ n }}</title>
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/oclock-css/jquery.dataTables.css">
+<link rel="stylesheet" href="https://storage.googleapis.com/oclock-css/messi.min.css" />
+<script type="text/javascript" language="javascript" src="https://storage.googleapis.com/oclock-javascript/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="https://storage.googleapis.com/oclock-javascript/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="https://storage.googleapis.com/oclock-javascript/messi.min.js"></script>
+</head>
+<body>
+<table id="t_x" class="display" cellspacing="0" width="100%">
+<thead>
+    <tr>
+        <th>Names</th>
+        <th>Email</th>
+        <th>N° Events</th>
+        <th>N° Follows</th>
+        <th>N° Comments</th>
+    </tr>
+</thead>
+
+<tfoot>
+    <tr>
+        <th>Names</th>
+        <th>Email</th>
+        <th>N° Events</th>
+        <th>N° Follows</th>
+        <th>N° Comments</th>
+    </tr>
+</tfoot>
+<tbody>
+{% for event in r %}
+<tr>				 
+    <td>{{ event.0 }}</td>
+    <td>{{ event.1 }}</td>
+    <td>{{ event.2 }}</td>
+    <td>{{ event.3 }}</td>
+    <td>{{ event.4 }}</td>
+ </tr>
+{% endfor %}
+    </tbody>
+    </table>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#t_x').DataTable({"order":[[2,"desc"]]});
+});
+</script>
+</body>
+</html>

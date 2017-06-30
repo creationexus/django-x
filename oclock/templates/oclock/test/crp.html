@@ -1,0 +1,26 @@
+{% load cache %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>CRP</title>
+{% cache 500 css %}
+<link rel="stylesheet" type="text/css" href="/static/css/crp.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/static/css/print.css" media="print">
+{% endcache %}
+</head>
+<body>
+
+<span style="display:none;" id="type">new</span>
+<span style="display:none;" id="ui">1</span>
+<span style="display:none;" id="uic">0</span>
+<div class="items"></div>
+{% cache 500 js %}
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/jquery.easy-confirm-dialog.min.js"></script>
+<script type="text/javascript" src="/js/load_async.js" async></script>
+{% endcache %}
+</body>
+</html>

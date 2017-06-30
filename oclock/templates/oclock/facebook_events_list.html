@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en_US" class="no-js">
+	<head>
+		<title>FB Events - O'Clock</title>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="https://storage.googleapis.com/oclock-images/oclock-ico.png">
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="/static/css/otime.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/static/css/responsive.css" media="screen">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/blitzer/jquery-ui.css" type="text/css"/>
+		<style>
+		a{text-decoration: none;}
+    	.menu_list{
+			background:#FFF;
+			width:150px;
+			list-style:none;
+			position:absolute;
+			z-index:4;
+			display:none;
+			text-align:left;
+			font-size:14px;
+			color:black;
+			font-weight:100;
+			padding:0;
+			top: 29px;
+			text-align:left;
+			right:10px;
+			-webkit-box-shadow:0 3px 8px;
+			background-color:#E77;
+	    }
+	    #lst li{-webkit-transition:all 0.30s ease-in;-moz-transition:all 0.30s ease-in;-ms-transition:all 0.30s ease-in;-o-transition:all 0.30s ease-in;padding:5px;padding-left:10px;}
+	    #lst li:hover{background-color:rgba(253,70,74,1);}
+	    #lst li a{display:block;color:white;}
+	    .hidden{display:none;}
+		</style>
+	<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+	for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+	mixpanel.init("87c672a0b3c66ee03ac32ddf4cc0b20b");</script><!-- end Mixpanel -->
+	</head>
+	<body class="pickled" style="margin:0px;">
+		<div id="container">
+			<div id="header">
+			  <div id="header-title"><label style="vertical-align:text-top;"><a href="/" style="color:white;font-size:24px;vertical-align:text-top;">O'Clock</a></label></div>
+			  <div id="me_hori">
+			  <a href="/events/new/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">NEW</a>
+			  <a href="/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">HOT</a>
+			  <a href="/events/nearby/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">NEARBY</a>
+			  <a href="/events/finished/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">FINISHED</a>
+			  </div>
+			  <div id="header-menu">
+			    {% if session_on == False %}
+			    <a id="ju_pl" href="/u/fb/in"><img id="header-login" src="/images/login-fb.png" /></a>
+			    {% else %}
+			    <a href="/in/new"><img src="/images/nc.png" style="width:30px;padding:0 15px;border-right-color: #e88;border-right-style: solid;border-right-width: 1px;"></a>
+			    <label id="header-menu-user-name">{{ users_name|escape }}</label>
+			    <a id="hma" href="javascript:void(0)"><img src="{{ users_path_web_avatar }}" id="header-menu-avatar"/></a>
+				<ul class="menu_list" id="lst">
+		            <li><a href="/user/{{ users_name_id }}/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">My Clocks</a></li>
+					<li><a href="/events/following/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">Following</a></li>
+		            <li><a href="/events/fb_events/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">FB Events</a></li>
+		            <li><a href="/events/draft/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">Drafts</a></li>
+		            <li style="background-color:rgba(253,70,74,1);"><a href="/u/out">Log Out</a></li>
+			 	</ul>
+			    {% endif %}
+			  </div>
+			  <!--<div id="header-search">
+			    <div id="searchForm" style="margin-top:8px;">
+				<fieldset>
+				    <div class="input" id="header-search-input">
+					<input type="text" name="s" id="s" value="Enter your search">
+				    </div>
+				    <input type="button" id="searchSubmit" value="" id="search">
+				</fieldset>
+			    </div>
+			  </div>-->
+			  <div style="clear:both;"></div>
+			</div>
+			<div id="content">
+				<div class="inner-content">
+					<div class="portfolio-page">
+						<span style="display:none;" id="type">facebook</span>
+						<span style="display:none;" id="ui">{% if session_on == False %}0{% else %}{{ users_id }}{% endif %}</span>
+						<span style="display:none;" id="uic">{% if session_on == False %}0{% else %}{{ users_id }}{% endif %}</span>
+						<div class="items">
+						</div>
+					</div>
+				</div>
+				<div style="padding-top:20px;text-align:center;"><div id="get_more" ></div><img id="get_more_img" src="/static/images/preloader.gif"/></div>
+			</div>
+		</div>
+		{% if user.users_id == user_id %}
+		<p></p>
+		{% else %}
+		<p></p>
+		{% endif %}
+		<div class="preloader"></div>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.migrate.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/js/jquery.imagesloaded.min.js"></script>
+	  	<script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript" src="/js/jquery.color.js"></script>
+		<script type="text/javascript" src="/js/search_in.js"></script>
+		<script type="text/javascript" src="/js/load_async.js"></script>
+		<script type="text/javascript" src="/js/jquery.easy-confirm-dialog.min.js"></script>
+		<script>
+		bo=document.getElementsByTagName("body");
+		bo[0].onclick=function(e){
+		   dq=$id("lst").style.display
+		   if(e.target==document.getElementById("header-menu-avatar")){
+		   	   if(dq=="none"||dq==""){
+			    $id("lst").style.display='table';
+			   }else{
+			    $id("lst").style.display='none';
+			   }
+		   }else{
+		   if(dq!="none"&&dq!=""){
+		    $id("lst").style.display='none';
+		   }
+		   }
+		}
+	  	function $id(id) {
+	      return document.getElementById(id);
+	  	}
+	  	$(document).ready(function(){
+	  		$('#all').click(function(){
+				all();
+			});
+			$('#run').click(function(){
+				run();
+			});
+			mixpanel.track_links("#ju_pl","register intent",{
+		        "referrer":document.referrer
+		    });
+	  	});
+		</script>
+	</body>
+</html>

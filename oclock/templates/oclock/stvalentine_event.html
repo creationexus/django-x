@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>O'Clock Love Collector</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/redmond/jquery-ui.css" rel="stylesheet" />
+<style>
+html,body {height:100%;margin:0;}
+body {
+  /*background-image: url(https://storage.googleapis.com/oclock-static/ce089ccb4edac430e360d5293210da23b8e0e936.jpg);*/
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: white;
+  font-family: 'Open Sans', sans-serif;
+}
+.align-center {
+text-align: center;
+}
+.black-opa {
+height: 100%;
+background-color:rgba(0,0,0,0.6);
+}
+article section {
+display: table;
+height: 100%;
+margin: 0;
+padding: 0;
+top: 0;
+width: 100%;
+}
+article section div#s_bo {
+display:table-cell;
+text-align:center;
+vertical-align:middle;
+width:100%;
+}
+@media only screen and (min-width:769px){
+#axa{font-size:48px;font-weight: 400;color:white;}
+#axb{font-size:48px;font-weight: 400;color:white;}
+#axc{font-size:48px;font-weight: 400;color:white;}
+#axd{font-size:48px;font-weight: 400;color:white;}
+#axe{font-size:48px;font-weight: 400;color:white;}
+#dde{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_year{font-size:110px;font-weight: bold;font-weight: 800;color:white;}
+#ddd{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_day{font-size:110px;font-weight: bold;font-weight: 800;color:white;}
+#ddc{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_hour{font-size:110px;font-weight: bold;font-weight: 800;color:white;}
+#ddb{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_minute{font-size:110px;font-weight: bold;font-weight: 800;color:white;}
+#dda{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_second{font-size:110px;font-weight:bold;font-weight:800;color:white;}
+#hyq{color:white;font-size:48px;font-weight:400;color:white;}
+#juq{color:white;font-size:24px;font-weight:400;color:white;}
+.video{width:640px;}
+#orc{width:170px;}
+}
+@media only screen and (min-width:481px) and (max-width:768px){
+#axa{font-size:32px;font-weight: 400;color:white;}
+#axb{font-size:32px;font-weight: 400;color:white;}
+#axc{font-size:32px;font-weight: 400;color:white;}
+#axd{font-size:32px;font-weight: 400;color:white;}
+#axe{font-size:32px;font-weight: 400;color:white;}
+#dde{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;margin:0 auto 0 auto;width:100%;}
+#d_year{font-size:90px;font-weight: bold;font-weight: 800;color:white;}
+#ddd{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;clear:both;}
+#d_day{font-size:90px;font-weight: bold;font-weight: 800;color:white;}
+#ddc{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_hour{font-size:90px;font-weight: bold;font-weight: 800;color:white;}
+#ddb{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_minute{font-size:90px;font-weight: bold;font-weight: 800;color:white;}
+#dda{float:left;width:auto;min-width:150px;min-height:150px;margin:4px;border-radius:8px;}
+#d_second{font-size:90px;font-weight:bold;font-weight:800;color:white;}
+#hyq{color:white;font-size:32px;font-weight:400;color:white;}
+#juq{color:white;font-size:16px;font-weight:400;color:white;}
+.video{width:640px;}
+#orc{width:120px;}
+article section div#s_bo{padding-bottom:50px;}
+}
+@media only screen and (max-width:480px){
+#axa{font-size:20px;font-weight:400;color:white;}
+#axb{font-size:20px;font-weight:400;color:white;}
+#axc{font-size:20px;font-weight:400;color:white;}
+#axd{font-size:20px;font-weight:400;color:white;}
+#axe{font-size:20px;font-weight:400;color:white;}
+#dde{float:left;width:auto;min-width:64px;min-height:64px;margin:4px;border-radius:8px;margin:0 auto 0 auto;width:100%;}
+#d_year{font-size:30px;font-weight: bold;font-weight: 800;color:white;}
+#ddd{float:left;width:auto;min-width:64px;min-height:64px;margin:4px;border-radius:8px;clear:both;}
+#d_day{font-size:30px;font-weight: bold;font-weight: 800;color:white;}
+#ddc{float:left;width:auto;min-width:64px;min-height:64px;margin:4px;border-radius:8px;}
+#d_hour{font-size:30px;font-weight: bold;font-weight: 800;color:white;}
+#ddb{float:left;width:auto;min-width:64px;min-height:64px;margin:4px;border-radius:8px;}
+#d_minute{font-size:30px;font-weight: bold;font-weight: 800;color:white;}
+#dda{float:left;width:auto;min-width:64px;min-height:64px;margin:4px;border-radius:8px;}
+#d_second{font-size:30px;font-weight: bold;font-weight: 800;color:white;}
+#hyq{color:white;font-size:14px;font-weight:400;color:white;}
+#juq{color:white;font-size:10px;font-weight:400;color:white;}
+.video{width:320px;}
+#orc{width:90px;}
+article section div#s_bo{padding-bottom:80px;}
+}
+</style>
+</head>
+<body>
+<article class="black-opa align-center">
+<section>
+<div id="s_bo">
+<span id="secs" style="display:none;">{{ seconds }}</span>
+<span id="ms" style="display:none;">{{ ms }}</span>
+<div id="pp_o" style="height:50px;margin:0 auto 0 auto;width:auto;position:relative;display:none;">
+<div style="display:inline-block;">
+	<div id="dde"><div id="d_year">00</div><div id="axe">years</div></div>
+	<div id="ddd"><div id="d_day">00</div><div id="axd">days</div></div>
+	<div id="ddc"><div id="d_hour">00</div><div id="axc">hours</div></div>
+	<div id="ddb" style=""><div id="d_minute">00</div><div id="axb">mins</div></div>
+	<div id="dda"><div id="d_second">00</div><div id="axa">secs</div></div>
+	<div style="clear:both;"></div>
+</div>
+<div>
+<span style="position:relative;" id="hyq">we're collecting all the <b><a style="color:white;" class="youtube" href="https://www.youtube.com/watch?v=IaHuzlPmrko">love of the world</a></b></span>
+</div>
+<div><span id="juq">every new <a style="color:white;" href="http://oclck.com/event/stvalentine/">#valentinesclock</a> will be added to this total counter</b></span></div>
+<div><a href="http://oclck.com/event/stvalentine/"><img src="https://storage.googleapis.com/oclock-images/boton_facebook_login_to_create.png" id="orc"/></a></div>
+
+</div>
+
+</div>
+</section>
+</article>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/oclock-javascript/jquery.youtubepopup.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$("a.youtube").YouTubePopup({ width: $(window).width()-10,autoplay: 1, draggable: false, fullscreen: 0, useYouTubeTitle: false});
+var secs=$('#secs').text();
+var velocity=$('#ms').text();
+var count=0;
+counter=setInterval(timer,velocity);
+function timer(){
+year=Math.floor(secs/(3600*24*365));
+year_r=secs%(3600*24*365);
+day=Math.floor(year_r/(24*3600));
+day_r=year_r%(24*3600);
+hour=Math.floor(day_r/3600);
+hour_r=day_r%3600;
+minute=Math.floor(hour_r/60);
+second=Math.floor(hour_r%60);
+$('#d_year').text(year);
+$('#d_day').text(day);
+$('#d_hour').text(hour);
+$('#d_minute').text(minute);
+$('#d_second').text(second);
+if(count%(parseInt(30*(1000/velocity)))==0){
+$.ajax({url:'http://oclck.com/special/stvalentine/',type:'post',success:function(response){$('body').css('background-image','url('+response+')');}});
+}
+secs++;
+count++;
+}
+$('#pp_o').css('display','inline-block');
+});
+</script>
+</body>
+</html>

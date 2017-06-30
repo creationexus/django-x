@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}{% endblock %}</title>
+{% block import_css %}{% endblock %}
+{% block import_javascript_sup %}{% endblock %}
+</head>
+<body>
+{% block content %}{% endblock %}
+{% block import_javascript %}{% endblock %}
+{% block javascript %}{% endblock %}
+</body>
+</html>

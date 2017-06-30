@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en_US" class="no-js">
+	<head>
+		<title>New - O'Clock</title>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="https://storage.googleapis.com/oclock-images/oclock-ico.png">
+		<!-- Open Graph data -->
+  		<meta property="og:title" content="O'Clock - It's about time!" />
+  		<meta property="og:description" content="O'Clock Inc." />
+  		<meta property="og:image" content="http://storage.googleapis.com/oclock-images/main_img.jpg" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="/static/css/otime.css" media="screen">	
+		<!--<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" media="screen">-->	
+		<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/static/css/responsive.css" media="screen">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/blitzer/jquery-ui.css" type="text/css"/>
+		<style>
+	    a{text-decoration: none;}
+	    .menu_list{background:#FFF;width:150px;list-style:none;position:absolute;z-index:4;display:none;text-align:left;font-size:14px;color:black;font-weight:100;padding:0;top:29px;text-align:left;right:10px;-webkit-box-shadow:0 3px 8px;background-color:#E77;}
+	    #lst_ntf li{-webkit-transition: all 0.30s ease-in;-moz-transition: all 0.30s ease-in;-ms-transition: all 0.30s ease-in;-o-transition:all 0.30s ease-in;padding:5px;padding-left:10px;}
+	    #lst_ntf li a{display:block;color:white;}
+	    #lst li{-webkit-transition:all 0.30s ease-in;-moz-transition:all 0.30s ease-in;-ms-transition:all 0.30s ease-in;-o-transition:all 0.30s ease-in;padding:5px;padding-left:10px;}
+	    #lst li:hover{background-color:rgba(253,70,74,1);}
+	    #lst li a{display:block;color:white;}
+	    #modal{display:block;z-index: 900;background-color:rgba(255,25,25,0.8);position:absolute;color:white;width:394px;}
+	    #modal #modal_body{background-color:rgba(255,100,100,1);padding:20px;border-radius:5px;overflow-y:scroll;width:294px;margin-left:30px;margin-top:10px;}
+	    #header-title #logo{vertical-align:text-top;color:white;font-size:24px;}
+	    .n_fb{font-weight:bold;}
+	    .hidden{display:none;}
+		</style>
+		<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+		for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+		mixpanel.init("87c672a0b3c66ee03ac32ddf4cc0b20b");</script><!-- end Mixpanel -->
+	</head>
+	<body class="pickled" style="margin:0">
+		<div id="container">
+			<div id="header">
+			  <div id="header-title"><label id="logo">O'Clock</label></div>
+			  <div id="me_hori">
+				  <a href="/events/new/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;border-bottom:3px solid white;">NEW</a>
+				  <a href="/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">HOT</a>
+				  <a href="/events/nearby/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">NEARBY</a>
+				  <a href="/events/finished/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">FINISHED</a>
+			  </div>
+			  <div id="header-menu">
+			    {% if users_name == None %}
+			    <a href="/u/fb/in"><img id="header-login" src="/images/login-fb.png"></a>
+			    {% else %}
+			    <a href="/in/new"><img id="i_new" src="/images/nc.png"/></a>
+			    <a id="_ouw" href="javascript:void(0)"><img id="i_notif" src="/images/notification.png"></a>
+			    <ul id="lst_ntf"></ul>
+			    <!--<a id="ifr" href="javascript:void(0)"><img src="/images/if.png" style="width:30px;padding:0 15px;border-right-color: #e88;border-right-style: solid;border-right-width: 1px;"></a>-->
+			    <label id="header-menu-user-name">{{ users_name }}</label>
+			    <a id="hma" href="javascript:void(0)"><img src="{{ users_path_web_avatar }}" id="header-menu-avatar"/></a>
+			    <ul class="menu_list" id="lst">
+		            <li><a href="/user/{{ users_name_id }}/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">My Clocks</a></li>
+		            <li><a href="/events/following/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">Following</a></li>
+		            <li><a href="/events/fb_events/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">FB Events</a></li>
+		            <li><a href="/events/draft/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">Drafts</a></li>
+		            <li style="background-color:rgba(253,70,74,1);"><a href="/u/out">Log Out</a></li>
+			 	</ul>{% endif %}
+			  </div>
+			  <div id="header-search">
+			    <div id="searchForm" style="margin-top:8px;">
+				<fieldset>
+				    <div class="input" id="header-search-input">
+					<input type="text" name="s" id="s" value="Enter your search">
+				    </div>
+				    <input type="button" id="searchSubmit" value="" id="search">
+				</fieldset>
+			    </div>
+			  </div>
+			  <div style="clear:both;"></div>
+			</div>
+			<div id="content">
+				<div class="inner-content">
+					<div class="portfolio-page">
+						<span style="display:none;" id="type">new</span>
+						<span style="display:none;" id="ui">{{ user.users_id }}</span>
+						<span style="display:none;" id="uic">{% if session_on == False %}0{% else %}{{ user.users_id }}{% endif %}</span>
+						<div class="items" style="opacity:0;">
+						</div>
+					</div>
+				</div>
+				<div style="padding-top:20px;text-align:center;"><div id="get_more" ></div><img id="get_more_img" src="/static/images/preloader.gif"/></div>
+			</div>
+		</div>
+		<div class="preloader"></div>
+		<div id="modal" style="display:none;">
+			<div style="padding-top:10px;text-align:center;">
+			<a id="c_inv" href="javascript:void(0)" style="display: block;text-align:right;padding-right:10px;font-weight:bold;color:white;">close</a>
+			<label style="">Invite your FACEBOOK FRIENDS!</label>
+			<input id="s_fr" type="text" onkeyup="s_fbf()" placeholder="Find friends..." style="
+			    display: block;
+			    margin-left: 30px;
+			    width: 332px;
+			    margin-top: 10px;
+			"/>
+			</div>
+			<div id="modal_body"></div>
+			<!--<a href="javascript:void(0)" id="b_ifb" style="
+			    display: block;
+			    margin-top: 20px;
+			    background-color: white;
+			    color:#E33;
+			    padding:8px 0;
+			    text-align: center;
+			    font-weight: bold;
+			    margin:10px 20px;
+			">SEND INVITATION</a>-->
+			<div style="text-align: center;margin-top: 10px;">
+				<fb:login-button size="large" login_text="SEND INVITATION" scope="publish_actions" onlogin="checkLoginState();"></fb:login-button>
+			</div>
+			<div style="width: 100%;background-color: #C11;display: block;padding:10px 0;margin-top: 15px;text-align: center;font-weight: bold;">YOU GOT <label id="n_ff">0</label> INVITATIONS</div>
+		</div>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.migrate.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.js"></script>
+	  	<script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script type="text/javascript" src="/js/jquery.color.js"></script>
+		<script type="text/javascript" src="/js/search_in.js"></script>
+		<script type="text/javascript" src="/js/load_async.js"></script>
+		<script type="text/javascript" src="/js/jquery.easy-confirm-dialog.min.js"></script>
+		{% if session_on != False %}
+		<script src=https://cdn.pubnub.com/pubnub.min.js ></script>
+		<script type="text/javascript">
+		var pubnub=PUBNUB.init({
+		    subscribe_key:'sub-c-56c8ca56-a255-11e4-8d46-02ee2ddab7fe',
+		    ssl:true
+		});
+		</script>
+		<script type="text/javascript" src="/js/channel.js"></script>
+		{% endif %}
+<script type="text/javascript">
+bo=document.getElementsByTagName("body");
+ifr=$id("ifr");
+if(ifr!=null){
+ifr.onclick=function(){
+	if($id('modal').style.display=="none"){
+		s_w();
+	}else{
+		h_w();
+	}
+}
+}
+bo[0].onclick=function(e){
+	   dq=$id("lst").style.display;
+	   dm=$id("lst_ntf").style.display;
+	   if(e.target==$id("header-menu-avatar")){
+	   	   if(dm!="none"||dm!=""){
+		    $id("lst_ntf").style.display='none';
+		   }
+	   	   if(dq=="none"||dq==""){
+		    $id("lst").style.display='table';
+		   }else{
+		    $id("lst").style.display='none';
+		   }
+	   }else if(e.target==$id("i_notif")||e.target==$id("ortz")){
+	   	   if(dq!="none"||dq!=""){
+		    $id("lst").style.display='none';
+		   }
+	   	   if(dm=="none"||dm==""){
+		    $id("lst_ntf").style.display='block';
+		   }else{
+		    $id("lst_ntf").style.display='none';
+		   }	   
+	   }else{
+		   if(dq!="none"&&dq!=""){
+		    $id("lst").style.display='none';
+		   }
+		   if(dm!="none"&&dm!=""){
+		    $id("lst_ntf").style.display='none';
+		   }
+	   }
+	};
+function $id(id) {return document.getElementById(id);}
+	  	function s_w(){
+		    var ventana=$id('modal');
+		    var bo=$id('modal_body');
+		    bo.style.height=(window.innerHeight-300)+"px";
+		    ventana.style.display='block';
+		    ventana.style.left=((document.body.clientWidth-document.getElementById("modal").offsetWidth)/2)+"px";
+		    a=window.pageYOffset;
+		    b=window.innerHeight-document.getElementById("modal").offsetHeight;//document.body.clientHeight;
+		    //c=document.body.scrollHeight;
+		    ventana.style.top=(a+(b/2))+"px";
+		}
+		function h_w(){
+		    var ventana=document.getElementById('modal');
+		    ventana.style.display='none';
+		}
+		$(document).ready(function(){
+			mixpanel.track("view page",{"url":location.pathname});
+			var hx=window.location.hash;
+			if(hx=="#welcome"){
+				mixpanel.people.set({
+				  	"$first_name":"{{ user.users_firstname }}",
+				    "$last_name":"{{ user.users_lastname }}",
+				    "$created":"{{ nowt }}",
+				    "$email":"{{ user.users_email }}",
+				    "source":"facebook"
+				});
+				mixpanel.register({
+				  	"$first_name":"{{ user.users_firstname }}",
+				    "$last_name":"{{ user.users_lastname }}",
+				    "$created":"{{ nowt }}",
+				    "$email":"{{ user.users_email }}",
+				    "source":"facebook"
+				});
+				mixpanel.track("register",{
+					"first_name":"{{ user.users_firstname }}",
+				    "last_name":"{{ user.users_lastname }}",
+				    "created":"{{ nowt }}",
+				    "email":"{{ user.users_email }}",
+				    "source":"facebook"});
+				mixpanel.alias("{{ user.users_id }}");
+				window.location.hash='';
+			}
+			if(hx=="#login"){
+				mixpanel.identify("{{ user.users_id }}");
+				mixpanel.track("login",{
+					"first_name":"{{ user.users_firstname }}",
+				    "last_name":"{{ user.users_lastname }}",
+				    "created":"{{ nowt }}",
+				    "email":"{{ user.users_email }}",
+				    "source":"facebook"});
+				window.location.hash='';
+			}
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-55810606-1', 'auto');
+			ga('send', 'pageview');
+			$('#c_inv').click(function(){$(this).parent().parent().hide();});
+			//a();
+			$('#_ouw').click(function(){
+				syot();
+			});
+			
+		});
+	    function a(){
+	    if (location.host.indexOf("sitepointstatic")>=0)return;
+	    var xhr=new XMLHttpRequest();
+	    if(xhr.upload){
+	      /*var o=$id("progress");
+	      var progress=o.appendChild(document.createElement("p"));
+	      progress.appendChild(document.createTextNode("upload " + file.name));
+	      xhr.upload.addEventListener("progress", function(e) {
+		      var pc=parseInt(100-(e.loaded / e.total * 100));
+		      progress.style.backgroundPosition=pc+"% 0";
+	      }, false);*/
+	      xhr.onreadystatechange=function(e){
+			  if (xhr.readyState==4){
+			  	if(xhr.status==200){
+			  		u=JSON.parse(xhr.responseText);
+			  		mod=$id("modal_body");
+			  	 	for(i=0;i<u["fb_fr"]["data"].length;i++){
+			  	 		p=document.createElement("p");
+			  	 		ch=document.createElement('input');
+			  	 		lb=document.createElement('label');
+			  	 		lb.className="n_fb";
+			  	 		lb.innerHTML=u["fb_fr"]["data"][i]["name"];
+			  	 		ch.type='checkbox';
+			  	 		ch.className="ch_us";
+			  	 		ch.addEventListener("click",cl_c,false);
+			  	 		ch.value=u["fb_fr"]["data"][i]["id"];
+			  	 		p.appendChild(ch);
+			  	 		p.className="m_us";
+			  	 		p.appendChild(lb);
+			  	 		mod.appendChild(p);
+			  	 	}
+				/*progress.className=(xhr.status==200?"success":"failure");*/
+			  	}
+			  }
+	      };
+	      var formData=new FormData();
+	      formData.append("a","");
+	      xhr.open("POST","/api_v2/friends/",true);
+	      xhr.send(formData);
+	    }
+	  }
+	  b_ifb=$id("b_ifb");
+  	  window.fbAsyncInit=function(){
+        FB.init({
+          appId      :'407223625967266',
+          xfbml      :true,
+          version    :'v2.1'
+        });
+        FB.getLoginStatus(function(response) {
+		   statusChangeCallback(response);
+		});
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+       
+	  function wp(){
+	  	ch_u=document.getElementsByClassName('ch_us');
+	  	msg="[";
+	  	n_se=0;
+	  	for(i=0;i<ch_u.length;i++){
+	  		if(ch_u[i].checked){
+	  			//msg+="@["+u["fb_fr"]["data"][i]["id"]+":1:"+u["fb_fr"]["data"][i]["name"]+"] ";
+	  			msg+=u["fb_fr"]["data"][i]["id"]+",";
+	  			n_se++;
+	  		}
+	  	}
+	  	msg+="]";
+	  	if(n_se>0){
+		  	var body=msg;
+			FB.api('/me/feed','post',{message:"Hi!",tags:body,place:"845744242113634"},function(response){
+			  if (!response||response.error){
+			    console.log(response.error);
+			    console.log(response);
+			  }else{
+			    console.log('Post ID: '+response.id);
+			  }
+			});
+		}
+	  };
+	  function s_fbf(e){s_fr=$id("s_fr").value.toLowerCase();
+	  	na_fbp=document.getElementsByClassName('m_us');
+	  	if(s_fr!=""){
+	  		for(i=0;i<u["fb_fr"]["data"].length;i++){
+	  			if(u["fb_fr"]["data"][i]["name"].toLowerCase().indexOf(s_fr)>=0){
+	  				na_fbp[i].style.display="block";
+	  			}else{
+	  				na_fbp[i].style.display="none";
+	  			}
+	  		}
+	  	}else{
+	  		for(i=0;i<u["fb_fr"]["data"].length;i++){
+	  			na_fbp[i].style.display="block";
+	  		}
+	  	}
+	  }
+	  function cl_c(e){
+	  	if(this.checked){
+	  		$id("n_ff").innerHTML=parseInt($id("n_ff").innerHTML)+1;
+	  	}else{
+	  		$id("n_ff").innerHTML=parseInt($id("n_ff").innerHTML)-1;
+	  	}
+	  }
+	  
+      function statusChangeCallback(response){
+	    if (response.status==='connected'){
+	      wp();
+	    } else if (response.status === 'not_authorized') {
+	    } else {
+	    }
+	  }
+	  function checkLoginState() {
+	    FB.getLoginStatus(function(response){
+	      statusChangeCallback(response);
+	    });
+	  }
+	  </script>
+	</body>
+</html>

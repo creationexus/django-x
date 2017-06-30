@@ -1,0 +1,12 @@
+{% if e == None %}
+<div>Invalid Object</div>
+{% else %}
+<div style="width:{{ w }}px;height:{{ h }}px;background-color:#{{ bg }};">
+<div style="color:#{{ c }}">{{ e.events_title }}</div>
+<img src="{% if e.events_image == None %}/static/images/default.jpg{% else %}{{ e.events_image }}{% endif %}" style="width:100%;height:80px;"/><br />
+<div style="float:left;width:33.3%;background-color:#d34836;color:#{{ c }}">LIKE ({{ e.events_likes }})</div>
+<div style="float:left;width:33.3%;background-color:#3B5998;color:#{{ c }}">CHAT({{ e.events_comments }})</div>
+<div style="float:left;width:33.3%;background-color:#4099FF;color:#{{ c }}">SHARE</div>
+<div style="clear:both;"></div>
+</div>
+{% endif %}

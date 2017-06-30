@@ -1,0 +1,7 @@
+cron:
+- description: facebook
+  url: /taskman/Uhagw37H-AAS_aUQhdII982-aAQqAh-W7kUjbXZ
+  schedule: every 10 mins
+- description: queue
+  url: /taskman/JazQpOaklW-AQ-A81WEkAyqOuw-KmzALkql72-1R
+  schedule: every 2 mins

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Create User</title>
+<script src="https://apis.google.com/js/client.js?onload=load"></script>
+<script>
+var funtime = 'https://festive-ally-585.appspot.com/_ah/api';
+gapi.client.load('funtime', 'v1', function() {
+	console.log('Loaded');
+  	doSomethingAfterLoading();
+}, funtime);
+
+gapi.client.funtime.user.get().execute( function(result) {
+        console.log("result: " + result);
+});
+</script>
+
+
+</head>
+<body>
+<form action="/user/create" method="post">{% csrf_token %}
+<label>Names:</label>
+<input type="text" name="u_name" /><br />
+<label>Firstname:</label>
+<input type="text" name="u_firstname" /><br />
+<label>Lastname:</label>
+<input type="text" name="u_lastname" /><br />
+<label>Email:</label>
+<input type="text" name="u_email" /><br />
+<label>Password:</label>
+<input type="text" name="u_password" /><br />
+<label>Birthday:</label>
+<input type="text" name="u_birthday" /><br />
+<label>Sex:</label>
+<input type="text" name="u_sex" /><br />
+<input type="submit" value="enviar" />
+
+<div id="results"></div>
+
+</form>
+</body>
+</html>

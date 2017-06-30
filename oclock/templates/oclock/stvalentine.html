@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en_US" class="no-js">
+  <head>
+    <title>ST Valentine - O'Clock</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--<link rel="stylesheet" type="text/css" href="/static/css/oclock.css" />-->	
+    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/static/css/responsive.css" media="screen">
+    <!--<link rel="stylesheet" type="text/css" media="all" href="/static/css/jsDatePick_ltr.min.css" />-->
+    <!-- <link rel="stylesheet" type="text/css" media="all" href="/static/css/datepicker.css" /> -->
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/static/css/datepicker.css" />
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://storage.googleapis.com/oclock-css/jquery.ultimate-smartbanner.css" type="text/css" media="screen">
+    <style type="text/css">
+    label{display:inline;}
+    #card_body{background-color:rgba(255,100,100,1);padding:20px;border-radius:5px;overflow-y:scroll;width:80%;margin-left:30px;margin-top:10px;height:50%;text-align:left;}
+    .up_a{padding:5px;padding-top:45px;height:100%;}
+    .up_b{height:100%;border:4px dashed #CCC;border-radius:7px;display:block;background:rgba(0,0,0,0.3);}
+    .fileset{width:50%;height:100%;float:left;border:4px double #ac3;box-sizing:border-box;-moz-box-sizing:border-box;}
+    #msg{font-size:20px;width:70%;height:60%;margin-top:70px;background-image:url(http://storage.googleapis.com/oclock-images/background-tw.png);padding:20px;}
+    #s_fr{display:block;margin-left:30px;width:80%;margin-top:10px;}
+    .btx{margin:0 5px;}
+    .btx_i{width:100px;height:100px}
+    #_juq{width:140px;margin-top:20px;}
+    .ln_d{color:#C25;margin:12px;font-size:24px;}
+    @media screen and (max-width:480px){
+    .btx_i{width:70px;height:70px}
+    .fileset{width:100%;height:450px;}
+    #msg{height:60%;margin-top:30px;}
+    #s_fr{width:245px;}
+    #card_body{width:220px;}
+    #_juq{width:60px;margin-top:5px;}
+    .ln_d{font-size:14px;margin:10px;}
+    }
+    #px_1{background:url(http://storage.googleapis.com/oclock-images/backg_img.png) repeat center center;}
+    #filedrag{display: none;font-weight: bold;text-align: center;color: #555;border-radius: 7px;cursor: default;height:100%;}
+    #filedrag.hover{color: #f00;border-color: #f00;border-style:solid;box-shadow:inset 0 3px 4px #888;}
+    div#header{color: #FFFFFF;font-size:24px;padding:10px;text-align:center;position:fixed;top:0;left:0;z-index:999;width:100%;background-color:rgba(253,70,74,1);padding:0;}
+    #header:after{background-image: url(/static/images/oclb.png);background-repeat: repeat-x;background-size: auto;background-position: 0 0;bottom: -4px;content: '';height: 4px;left: 0;position: absolute;right: 0;}
+    div#header-title{float:left;height:25px;padding:3px 0 11px 10px;}
+    div#header-menu{float:right;height:25px;padding:5px 10px;}
+    span#header-menu-user-name{height:30px;vertical-align:middle;font-size:18px;padding-left:5px;padding-right:5px;}
+    img#header-menu-avatar{width:30px;height:30px;border-radius:20%;-webkit-border-radius:20%;-moz-border-radius:20%;}
+    div#header-search{float:right;height:25px;}
+    #header-search-input{width: 150px; padding-right: 15px; background-color: rgb(232, 237, 241);font-size:16px;}
+    img#header-login{width:130px;height:30px;}
+    fieldset{margin: 0;padding: 0;border: 0;font-size:100%;font: inherit;vertical-align: baseline;}
+    #searchForm fieldset {width:240px;position:relative;display:block;}
+    div.input{width:120px;padding:0 15px 0 15px;border-radius:20px;border:1px solid #c6d2db;border-top:1px solid #b4c1cb;box-shadow:inset 0 1px 2px rgba(0,0,0,0.08);float:right;background:#e8edf1;}
+    div.input.focus{border:1px solid #9ecbe2;box-shadow:0 0 6px #abdcff, inset 0 1px 2px rgba(0,0,0,0.08);}
+    fieldset #search{display: none;}
+    fieldset input #s{color: rgb(180, 189, 196);font-size:16px;}
+    input#s{width:100%;border:0;border-radius:20px;background:transparent;height:16px;color:#b4bdc4;text-shadow:0 1px 1px #fff;}
+    input#s:focus{outline:none;}
+    input#searchSubmit{width:24px;height:24px;text-indent:-9999px;overflow:hidden;background:url(/static/images/search-icon.png) no-repeat;border:0;position:absolute;top:3px; right:13px;z-index:5;display:none;cursor:pointer;}
+    body{font-family: "Open Sans", "Arial", "Helvetica", sans-serif;font-size: 12px;height: 100%;}
+    .align-center{text-align: center;}
+    div#f1, div#f2, div#f3{display: table;height: 100%;text-align: center;vertical-align: middle;width: 100%;}
+    #cr_el{-webkit-transition:all 1s ease-in;-moz-transition:all 1s ease-in;-ms-transition:all 1s ease-in;-o-transition:all 1s ease-in;color:#FFFFFF;height:100%;width:100%;}
+    #se_el{display: table;height: 90%;margin: 0;padding: 0;top: 0;width: 100%;}
+    a{text-decoration:none;}
+    #t_s option{margin:40px;background: rgba(0,0,0,0.3);color:#fff;}
+    #t_s option:not(:checked){background-color:white;color:#000;}
+    #t_s:hover{border-color:red;}
+    .i_mv{width:40px;height:40px;margin:1px;}
+    .menu_list{background:#FFF;width:150px;list-style:none;position:absolute;z-index:4;display:none;text-align:left;font-size:14px;color:black;font-weight:100;padding:0;top:43px;text-align:left;right:10px;-webkit-box-shadow:0 3px 8px;background-color:#E77;}
+    #lst li{-webkit-transition:all 0.30s ease-in;-moz-transition:all 0.30s ease-in;-ms-transition:all 0.30s ease-in;-o-transition:all 0.30s ease-in;padding:5px;padding-left:10px;}
+    #lst li:hover{background-color:rgba(253,70,74,1);}
+    #lst li a{display:block;color:white;text-decoration:none;}
+    .hh:hover{border-color:red;}
+    @font-face{font-family:fontp;src:url(/static/fonts/loveness.ttf);}
+	#ms_al,#qkw{font-family:fontp;}
+	textarea,label,span,div,.fwb{font-family:fontp;}
+    </style>
+  	<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+	for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+	mixpanel.init("87c672a0b3c66ee03ac32ddf4cc0b20b");</script><!-- end Mixpanel -->
+	<meta name="author" content="O'clock, Inc">
+    <meta name="msApplication-ID" content="oclock" />
+    <meta name="msApplication-TileImage" content="https://storage.googleapis.com/oclock-images/play_store_oclck.png" />
+    <meta name="msApplication-WinPhonePackageUrl" content="e983e3b6-b59e-44bb-bf6f-8028acb06e18" />
+    <meta name="google-play-app" content="app-id=com.ibex.oclckapp">
+    <link rel="stylesheet" href="https://storage.googleapis.com/oclock-css/jquery.ultimate-smartbanner.css" type="text/css" media="screen">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  </head>
+  <body style="margin:0;">
+      <div id="header">
+      <div id="header-title"><span style="vertical-align:sub;color:white;"><a href="/" style="color:white;text-decoration:none;"><img src="/images/oclock.png" style="width:30px;height:30px;vertical-align:middle;"/>'Clock</a></span></div>
+      <div id="header-menu">
+		<span id="header-menu-user-name">{{ users_name }}</span>
+		<a id="hma" href="javascript:void(0)"><img src="{{ users_path_web_avatar }}" id="header-menu-avatar"/></a>
+		<ul class="menu_list" id="lst">
+            <li><a href="/user/{{ users_name_id }}/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">My Clocks</a></li>
+            <li><a href="/events/following/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">Following</a></li>
+            <li><a href="/events/fb_events/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">FB Events</a></li>
+            <li><a href="/events/draft/"><img src="/images/oclock.png" style="width:20px;height:20px;vertical-align:bottom;margin-right:5px;">Drafts</a></li>
+            <li style="background-color:rgba(253,70,74,1);"><a href="/u/out">Log Out</a></li>
+	 	</ul>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <article id="cr_el" class="black-opa align-center">
+      <section id="se_el" style="height:100%;">
+	<div id="f1" style="background-color:#EEE">
+	 <form id="dx1" class="up_a">
+	  <fieldset id="cv_on" class="fileset" style="background: url(http://storage.googleapis.com/oclock-images/image1.png) no-repeat center center;background-size:cover;">
+	    <input type="file" id="fileselect" name="fileselect" style="display: none;" />
+	    <div id="filedrag">
+	    <div style="width:100%;text-align:right;"></div>
+	    <div style="width:100%;"><img id="pxc" style="width:100%;" src="https://storage.googleapis.com/oclock-images/valentine_stamp.png"></div>
+	    <div><span style="color:white;position:relative;bottom:80px;font-size:30px;text-shadow:2px 2px #000000;" id="qkw"></span></div>
+	    </div>
+	  </fieldset>
+	  <fieldset id="px_1" class="fileset">
+	  	<br/>
+		<div style="position:relative;text-align:center;">
+	    	<a class="btx" href="javascript:void(0)" onclick="document.getElementById('fileselect').click();"><img class="btx_i" src="https://storage.googleapis.com/oclock-images/upload_love.png"></a>
+		</div>
+	  	<br/>
+	    <img style="width:200px;" src="https://storage.googleapis.com/oclock-images/when_did_you_start_dating.png" />
+	    <br/>
+	    <br/>
+	    <input type="text" id="dt" class="span2" size="16" value="" style="display:inline-block;" data-date-format="yyyy-mm-dd" data-date="dateValue: Customer.DateOfBirth" data-date-viewmode="years" placeholder="2000-01-01" />	
+		<input type="text" id="tm" name="tm" value="00:00:00" maxlength="5" placeholder="11:23"/>
+	    <br/><br/><br/>
+	    <a id="nx_1" href="javascript:void(0)"><img src="https://storage.googleapis.com/oclock-images/choose_your_valentine.png" style="width:200px;"/></a>
+	  </fieldset>
+	  <fieldset id="px_2" class="fileset" style="display:none;background-color:rgba(255,25,25,0.8);color:white;">
+	  <div style="padding-top:10px;text-align:center;">
+			<input id="s_fr" type="text" onkeyup="s_fbf()" placeholder="find your valentine..."/>
+			</div>
+			<div id="card_body"></div>
+			<!--<a href="javascript:void(0)" id="b_ifb" style="
+			    display: block;
+			    margin-top: 20px;
+			    background-color: white;
+			    color:#E33;
+			    padding:8px 0;
+			    text-align: center;
+			    font-weight: bold;
+			    margin:10px 20px;
+			">SEND INVITATION</a>-->
+			<div style="text-align: center;margin-top: 10px;">
+				<fb:login-button size="large" login_text="CREATE YOUR VALENTINES CLOCK" scope="publish_actions" onlogin="checkLoginState();"></fb:login-button>
+			</div>
+			<div id="xow" style="width: 100%;background-color: #C11;display: block;padding:10px 0;margin-top: 15px;text-align: center;font-weight: bold;">YOU'RE SENDING <label id="n_ff">0</label></div>
+		    <input type="button" id="b_s" value="Send Card" style="display:none;"/>
+	  		<a id="pvx" href="javascript:void(0)" style=""><img id="_juq" src="http://storage.googleapis.com/oclock-images/backnen.png"></a>
+	  </fieldset>
+	  <fieldset id="px_3" class="fileset" style="display:none;">
+	  <div style="width:100%;margin-top:15px;"><img id="qtu" style="width:320px;" src=""/></div>
+		<p class="ln_d">Nice Picture!</p>
+		<br/>
+		<p class="ln_d">See your Valentine's Clock running <a id="ux_q" target="_blank" href="#">right here</a></p>
+		<br />
+		<p class="ln_d">Or share your love</p>
+		<p class="ln_d"><a id="lw_t" target="_blank" href="">Twitter</a> / <a id="lw_f" target="_blank" href="">Facebook</a></p>
+	  </fieldset>
+	  </form>
+	</div>
+	<div id="progress" style="display:none;"></div>
+	<span id="im_bg" style="display:none;"></span>
+	{% for vv in imgs_rnd %}
+		<span style="display:none;" class="bg_ix">{{ vv }}</span>
+	{% endfor %}
+	</div>
+      </section>
+    </article>
+   <div class="preloader"></div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+   <script src="/js/bootstrap-datepicker.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+   <script src="/js/JavaScriptUtil.js"></script>
+   <script src="/js/Parsers.js"></script>
+   <script src="/js/JavaScriptUtil.js"></script>
+   <script src="/js/Parsers.js"></script>
+   <script src="/js/InputMask.js"></script>
+   <script type="text/javascript" src="https://storage.googleapis.com/oclock-javascript/jquery.ultimate-smartbanner.js"></script>
+   <script type="text/javascript" src="http://storage.googleapis.com/oclock-javascript/countdown.min.js" async></script>
+   <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000000" />
+<script>
+var f_im,lat=0,lon=0,country="",friends='',fr_lst='',file=undefined,chx=false;
+window.fbAsyncInit=function(){
+   FB.init({
+     appId      :'407223625967266',
+     xfbml      :true,
+     status 	: true,
+     cookie 	: true,
+     version    :'v2.1'
+   });
+   /*FB.getLoginStatus(function(response) {
+     statusChangeCallback(response);
+   });*/
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "//connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+function $id(id){return document.getElementById(id);}
+function cl_c(e){
+  	if(this.checked){
+  		$('#n_ff').text(parseInt($('#n_ff').text())+1);
+  	}else{
+  		$('#n_ff').text(parseInt($('#n_ff').text())-1);
+  	}
+}
+function s_fbf(e){s_fr=$id("s_fr").value.toLowerCase();
+	na_fbp=document.getElementsByClassName('m_us');
+	if(s_fr!=""){
+		for(i=0;i<u["fb_fr"]["data"].length;i++){
+			if(u["fb_fr"]["data"][i]["name"].toLowerCase().indexOf(s_fr)>=0){
+				na_fbp[i].style.display="block";
+			}else{
+				na_fbp[i].style.display="none";
+			}
+		}
+	}else{
+		for(i=0;i<u["fb_fr"]["data"].length;i++){
+			na_fbp[i].style.display="block";
+		}
+	}
+}
+function c(xhr,file){
+      xhr.upload.addEventListener("progress",function(e){
+	      var pc=parseInt(e.loaded/e.total*100);
+	      if(pc<=100){
+	      	$id("b_s").value="Create Clock ("+pc+"%)";
+	      }else{
+	      	$id("b_s").value="Create Clock";
+	      }
+      },false);
+      xhr.onreadystatechange=function(e){
+	  if (xhr.readyState==4){
+	  	if(xhr.status==201){
+	  		oo=JSON.parse(xhr.responseText);
+	  		FB.api('/me/feed','post',{message:"Dear "+fr_lst+" here's to the best "+$('#qkw').text()+" of my life. See the live clock here: http://oclck.com/"+oo.e_title_id+"/ - #ValentinesClock",tags:friends,place:"845744242113634",picture:'http://oclck.com/event/image/'+oo.e_id+'/',caption:'O’Clock Inc.',link:"http://oclck.com/special/stvalentine/",description:'O\'Clock helps you to never forget those important moments of your life. Create or join a new countdown today at www.oclck.com',name:'Create your own Valentine\'s Clock'},function(response){
+	  		  if (!response||response.error){
+	  		    alert(response.error.message);
+	  		  }else{
+	  		    //response.id
+	  		  }
+	  		});
+	  		sel=document.getElementById("t_s");
+	  		mixpanel.track("clock special created",{
+	  			"clock_id":oo.e_title_id,
+			    "type":'countdown',
+			    "from":"new",
+			    "plan":"regular"
+			});
+			  $id("px_1").style.display='none';
+			  $id("px_2").style.display='none';
+			  $('#qtu').attr('src','http://oclck.com/event/image/'+oo.e_id+'/');
+			  $('#lw_t').attr('href',"https://twitter.com/share?url=http://oclck.com/"+oo.e_title_id+"&text=This is my #ValentinesClock http://oclck.com/"+oo.e_title_id+"/. Create your own at http://oclck.com/special/stvalentine/&hashtags=oclock,valentinesclock");
+			  $('#lw_f').attr('href',"https://www.facebook.com/dialog/share?app_id=407223625967266&display=popup&href=http://oclck.com/"+oo.e_title_id+"/?"+oo.e_secs+"&redirect_uri=http://oclck.com/"+oo.e_title_id+"/");
+			  $id("px_3").style.display='block';
+			  $id("ux_q").href="/"+oo.e_title_id;
+	  	}else{
+	  		console.log(xhr.responseText);
+	  	 	oo=Object.keys(JSON.parse(xhr.responseText));
+	  	 	for(i=0;i<oo.length;i++){
+	  	 		if(oo[i]=="status"){
+	  	 		}else{
+	  	 		}
+	  	 	}
+	  		$id("b_s").disabled=false;
+	  	}
+	  }
+      };
+      var formData=new FormData();
+      if(file!==undefined){
+      	formData.append("fileselect",file);
+      	xhr.open("POST",'/event/stvalentine/',true);
+      	xhr.setRequestHeader("X_FILENAME",file.name);
+      }else{
+      	xhr.open("POST",'/event/stvalentine/',true);
+      }
+      formData.append("lat",lat.toString());
+      formData.append("lon",lon.toString());
+      formData.append("country",country.toString());
+      formData.append("str_img",$('#im_bg').text());
+      formData.append("msg",'Hello');
+      formData.append("friends",'{"data":'+friends+'}');
+      if($('#tm').val()!=''){
+    	  stt=$('#dt').val()+' '+$('#tm').val();
+      }else{
+    	  stt=$('#dt').val()+' 00:00:00';
+      }
+      formData.append("start",stt);
+      
+      xhr.send(formData);
+  }
+function b(file){
+    if (location.host.indexOf("sitepointstatic")>=0)return;
+    var xhr=new XMLHttpRequest();
+    if(xhr.upload&&file===undefined){
+    	c(xhr,file);
+    }else if(xhr.upload&&(file.type=="image/jpeg"||file.type=="image/png"||file.type=="image/bmp")&&file.size<=$id("MAX_FILE_SIZE").value){
+      	c(xhr,file);
+    }
+}
+(function(){
+  function $id(id) {
+    return document.getElementById(id);
+  }
+  function FileDragHover(e){
+    e.stopPropagation();
+    e.preventDefault();
+    e.target.className=(e.type=="dragover"?"hover":"");
+  }
+  function FileSelectHandler(e){
+    FileDragHover(e);
+    var file=e.target.files||e.dataTransfer.files;
+    f_im=file[0];
+    ParseFile(f_im);
+  }
+  function ParseFile(file){
+	cv_on=$id("cv_on");
+    if (file.type.indexOf("image")==0){
+      var reader = new FileReader();
+      reader.onload=function(e){
+	  cv_on.style.background="url('"+e.target.result+"') no-repeat center center";
+	  cv_on.style.backgroundSize="cover";
+	  chx=true;
+    }
+    reader.readAsDataURL(file);
+    }
+    if (file.type.indexOf("text") == 0) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+      }
+      reader.readAsText(file);
+    }
+  }
+  function Init(){
+    var fileselect=$id("fileselect"),
+    filedrag=$id("filedrag"),
+    submitbutton=$id("submitbutton");
+    fileselect.addEventListener("change",FileSelectHandler,false);
+    var xhr=new XMLHttpRequest();
+    if (xhr.upload){
+      filedrag.addEventListener("dragover",FileDragHover,false);
+      filedrag.addEventListener("dragleave",FileDragHover,false);
+      filedrag.addEventListener("drop",FileSelectHandler,false);
+      filedrag.style.display="block";
+    }
+  }
+  if (window.File&&window.FileList&&window.FileReader) {
+    Init();
+  }
+})();
+window.onload=function(){
+  /*cv_on=$id("cv_on");
+  if($('#im_bg').text()!=""){
+	cv_on.style.background="url('"+$('#im_bg').text()+"') no-repeat center center";
+	cv_on.style.backgroundSize="cover";
+  }*/
+  hl=document.getElementsByTagName("body")[0];
+  hl.style.width=window.innerWidth+"px";
+  hl.style.height=window.innerHeight+"px";
+  document.getElementsByTagName("form")[0].style.height=(window.innerHeight-70)+"px";
+  var b_s=$id("b_s"),
+  nx_1=$id("nx_1");
+  pvx=$id("pvx");
+  hl.onclick=function(e){
+   dq=$id("lst").style.display
+   if(e.target==document.getElementById("header-menu-avatar")){
+   	   if(dq=="none"||dq==""){
+	    $id("lst").style.display='table';
+	   }else{
+	    $id("lst").style.display='none';
+	   }
+   }else{
+   if(dq!="none"&&dq!=""){
+    $id("lst").style.display='none';
+   }
+   }
+  }
+  nx_1.onclick=function(){
+    if(chx&&$('#dt').val()!=''&&$('#tm').val()!=''){
+	    $id("px_1").style.display='none';
+	    $id("px_2").style.display='table';
+    }else{
+    	alert("Select your image and datetime please.");
+    }
+  };
+  pvx.onclick=function(){
+	  $id("px_1").style.display='table';
+	  $id("px_2").style.display='none';
+	  $id("px_3").style.display='none';
+  };
+  b_s.onclick=function(){
+  	$id("b_s").disabled=true;
+    b(f_im);
+  };
+  var nowTemp=new Date();
+  var now=new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  $('#dt').datepicker();
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create','UA-55810606-1','auto');
+	ga('send','pageview');
+	a();
+};
+google.maps.event.addDomListener(window,'load',initialize);
+function initialize(){
+  geocoder=new google.maps.Geocoder();
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+       lat=position.coords.latitude;
+       lon=position.coords.longitude;
+       var pos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        geocoder.geocode({'latLng': new google.maps.LatLng(lat,lon)},function(results,status){
+            if (status==google.maps.GeocoderStatus.OK&&results.length){
+                results=results[0].address_components;
+				country=results[6]['short_name'];
+            }else{}
+        });
+       },function(){
+       handleNoGeolocation(true);
+    });
+  }else{
+    handleNoGeolocation(false);
+  }
+}
+function handleNoGeolocation(errorFlag) {
+  /*if(errorFlag){
+    alert('Error: The Geolocation service failed.');
+  }else{
+    alert('Error: Your browser doesn\'t support geolocation.');
+  }*/
+}
+function a(){
+    if (location.host.indexOf("sitepointstatic")>=0)return;
+    var xhr=new XMLHttpRequest();
+    if(xhr.upload){
+      xhr.onreadystatechange=function(e){
+		  if (xhr.readyState==4){
+		  	if(xhr.status==200){
+		  		u=JSON.parse(xhr.responseText);
+		  		mod=$id("card_body");
+		  	 	for(i=0;i<u["fb_fr"]["data"].length;i++){
+		  	 		p=document.createElement("p");
+		  	 		ch=document.createElement('input');
+		  	 		lb=document.createElement('label');
+		  	 		lb.htmlFor='v'+u["fb_fr"]["data"][i]["id"];
+		  	 		lb.className="n_fb";
+		  	 		lb.style.verticalAlign='sub';
+		  	 		lb.innerHTML=u["fb_fr"]["data"][i]["name"];
+		  	 		ch.type='checkbox';
+		  	 		ch.className="ch_us";
+		  	 		ch.addEventListener("click",cl_c,false);
+		  	 		ch.value=u["fb_fr"]["data"][i]["id"];
+		  	 		ch.id='v'+u["fb_fr"]["data"][i]["id"];
+		  	 		p.appendChild(ch);
+		  	 		p.className="m_us";
+		  	 		p.appendChild(lb);
+		  	 		mod.appendChild(p);
+		  	 	}
+		  	}
+		  }
+      };
+      var formData=new FormData();
+      formData.append("a","");
+      xhr.open("POST","/api_v2/friends/",true);
+      xhr.send(formData);
+    }
+  }
+   
+function wp(){
+	ch_u=document.getElementsByClassName('ch_us');
+	msg="[";
+	n_se=0;
+	for(i=0;i<ch_u.length;i++){
+		if(ch_u[i].checked){msg+=u["fb_fr"]["data"][i]["id"]+",";fr_lst+=u["fb_fr"]["data"][i]["name"]+", ";n_se++;}
+	}
+	msg=msg.slice(0,-1);
+	msg+="]";
+	fr_lst=fr_lst.slice(0,-1);
+	if(n_se>0){friends=msg;b(f_im);}
+};
+function statusChangeCallback(response){
+  if(response.status==='connected'){
+    wp();
+  }else if (response.status==='not_authorized'){
+  }else{
+  }
+}
+function checkLoginState() {
+  FB.getLoginStatus(function(response){
+    $('#xow').empty().append($('<img src="http://oclck.com/images/ld_ng.GIF">'));
+    statusChangeCallback(response);
+  });
+}
+$(window).load(function(){
+	 function dateChanged(){
+		 if($('#dt').val()!=''){
+			$('#qkw').text(countdown(new Date($('#dt').val())).toString());
+		 }
+	 }
+	 $('#pxc').height($('#cv_on').height()-12);
+	 $('#dt').datepicker() 
+	    .change(dateChanged)
+	    .on('changeDate', dateChanged);
+	 var errorMessage = "Invalid date: ${value}. Expected format: ${mask}";
+	 var dateParser4=new DateParser("HH:mm:ss");
+	 var dateMask4=new DateMask(dateParser4,"tm");
+	 dateMask4.validationMessage=errorMessage;
+  });
+  $(document).ready(function(){
+  $('#tm').blur(function(){
+	  if($('#dt').val()!=''&&$('#tm').val()!=''){
+		  $('#qkw').text(countdown(new Date($('#dt').val()+' '+$('#tm').val())).toString());
+	  }
+  });
+  $.smartbanner({
+        title: 'O\'Clock',
+        author: 'Ibex Technologies',
+        price: 'FREE',
+        icon: 'http://storage.googleapis.com/oclock-images/oclock-store.png',
+        button: 'VIEW',
+        appStoreLanguage: 'en',
+
+        daysHidden:1,
+        daysReminder:0
+  });
+  $('#uq_lp').click(function(){
+	nk=$('.bg_ix').length;
+	ps=Math.floor((Math.random()*nk));
+	sti=$(".bg_ix").eq(ps).text();
+	//$('#im_bg').text(sti);
+	pxc=$id("pxc");
+	pxc.src=sti;//attr("src",sti);//src=sti;
+	//pxc.style.background="url('"+sti+"') no-repeat center center";
+	//pxc.style.backgroundSize="cover"
+  });
+  var hx=window.location.hash;
+  if(hx=="#welcome"){
+		mixpanel.people.set({
+		  	"$first_name":"{{ user.users_firstname }}",
+		    "$last_name":"{{ user.users_lastname }}",
+		    "$created":"{{ nowt }}",
+		    "$email":"{{ user.users_email }}",
+		    "source":"facebook"
+		});
+		mixpanel.register({
+		  	"$first_name":"{{ user.users_firstname }}",
+		    "$last_name":"{{ user.users_lastname }}",
+		    "$created":"{{ nowt }}",
+		    "$email":"{{ user.users_email }}",
+		    "source":"facebook"
+		});
+		mixpanel.track("register",{
+			"first_name":"{{ user.users_firstname }}",
+		    "last_name":"{{ user.users_lastname }}",
+		    "created":"{{ nowt }}",
+		    "email":"{{ user.users_email }}",
+		    "source":"facebook"});
+		mixpanel.alias("{{ user.users_id }}");
+		window.location.hash='';
+	}
+	if(hx=="#login"){
+		mixpanel.identify("{{ user.users_id }}");
+		mixpanel.track("login",{
+			"first_name":"{{ user.users_firstname }}",
+		    "last_name":"{{ user.users_lastname }}",
+		    "created":"{{ nowt }}",
+		    "email":"{{ user.users_email }}",
+		    "source":"facebook"});
+		window.location.hash='';
+	}
+  });
+</script>
+</body>
+</html>

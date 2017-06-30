@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+  <script>
+  var contentType ="application/x-www-form-urlencoded; charset=utf-8";
+  $.ajax({
+    type:"GET",
+    contentType:contentType,
+    headers: {
+      'Authorization': 'Bearer fe377716971a48c39e8f9af5440ebac18f9311aa'
+    },
+    beforeSend: function (request){
+      request.setRequestHeader("Authorization", "Bearer fe377716971a48c39e8f9af5440ebac18f9311aa");
+    },
+     xhrFields: {
+      withCredentials: true
+  },
+    crossDomain: true,
+    url: "https://festive-ally-585.appspot.com/api/users/",
+    /*data: "json=" + escape(JSON.stringify(createRequestObject)),*/
+    processData: false,
+    success: function(msg) {
+	/*$("#results").append("The result =" + StringifyPretty(msg));*/
+    }
+  });
+  </script>
+</body>
+</html>

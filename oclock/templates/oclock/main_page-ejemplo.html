@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
+  </head>
+  <body>
+  <a href="{{ url }}">{{ url_linktext }}</a>
+    {% for event in events %}
+      {% if event.enable %}
+        <b>{{ event.title }}</b> wrote:
+      {% else %}
+        An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ event.title|escape }}</blockquote>
+    {% endfor %}
+
+    <form action="/sign/" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="guestbook_name" value="test" />
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+  </body>
+</html>

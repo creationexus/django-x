@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en_US" class="no-js">
+	<head>
+		<title>New - O'Clock</title>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="https://storage.googleapis.com/oclock-images/oclock-ico.png">
+				<!-- Open Graph data -->
+  		<meta property="og:title" content="O'Clock - It's about time!" />
+  		<meta property="og:description" content="O'Clock Inc." />
+  		<meta property="og:image" content="http://storage.googleapis.com/oclock-images/main_img.jpg" />
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="/static/css/otime.css" media="screen">		
+		<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="/static/css/responsive.css" media="screen">
+		<style>
+	    a{text-decoration:none;}
+	    .menu_list{background:#FFF;width:150px;list-style:none;position:absolute;z-index:4;display:none;text-align:left;font-size:14px;color:black;font-weight:100;padding:10px 0;top: 29px;text-align:left;right:10px;-webkit-box-shadow:0 3px 8px;border-radius:4px;}
+	    #lst li{-webkit-transition:all 0.30s ease-in;-moz-transition:all 0.30s ease-in;-ms-transition:all 0.30s ease-in;-o-transition:all 0.30s ease-in;padding:5px;padding-left:10px;}
+	    #lst li:hover{background:#E33;}
+	    #lst li a{display:block;}
+	    #modal{display:block;z-index: 900;background-color:rgba(255,25,25,0.8);position:absolute;color:white;width:394px;}
+	    #modal #modal_body{background-color:rgba(255,100,100,1);padding:20px;border-radius:5px;overflow-y:scroll;width:294px;margin-left:30px;margin-top:10px;}
+	    #header-title #logo{vertical-align:text-top;color:white;font-size:24px;}
+	    .n_fb{font-weight: bold;}
+	    .hidden{display:none;}
+		</style>
+		<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+		for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+		mixpanel.init("87c672a0b3c66ee03ac32ddf4cc0b20b");</script><!-- end Mixpanel -->
+	</head>
+	<body class="pickled" style="margin:0">
+		<div id="container">
+			<div id="header">
+			  <div id="header-title"><label id="logo">O'Clock</label></div>
+			  <div id="me_hori">
+			  <a href="/events/new/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;border-bottom:3px solid white;">NEW</a>
+			  <a href="/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">HOT</a>
+			  <a href="/events/nearby/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">NEARBY</a>
+			  <a href="/events/finished/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">FINISHED</a>
+			  </div>
+			  <!--<a href="/events/ending/" style="float:left;margin-left: 20px;margin-top:7px;padding: 5px;color:white;font-weight:bold;">ENDING</a>-->
+			  <div id="header-menu">
+			    {% if users_name == None %}
+			    <a id="ju_pl" href="/u/fb/in"><img id="header-login" src="/images/login-fb.png" /></a>
+			    {% else %}
+			    <a href="/in/new"><img src="/images/nc.png" style="width:30px;padding:0 15px;border-right-color: #e88;border-right-style: solid;border-right-width: 1px;"></a>
+			    <a id="ifr" href="javascript:void(0)"><img src="/images/if.png" style="width:30px;padding:0 15px;border-right-color: #e88;border-right-style: solid;border-right-width: 1px;"></a>
+			    <label id="header-menu-user-name">{{ users_name }}</label>
+			    <a id="hma" href="javascript:void(0)"><img src="{{ users_path_web_avatar }}" id="header-menu-avatar"/></a>
+			    <ul class="menu_list" id="lst">
+		            <li><a href="/user/{{ users_name_id }}/"><img src="/images/oclock.png" style="
+					    width: 20px;
+					    height: 20px;
+					    vertical-align: bottom;
+					">My Clocks</a></li>
+		            <li><a href="#"><img src="/images/oclock.png" style="
+					    width:20px;
+					    height:20px;
+					    vertical-align:bottom;
+					">Drafts</a></li>
+		            <li style="background:#E77;"><a href="/u/out">Log Out</a></li>
+			 	</ul>{% endif %}
+			  </div>
+			  <div id="header-search">
+			    <div id="searchForm" style="margin-top:8px;">
+				<fieldset>
+				    <div class="input" id="header-search-input">
+					<input type="text" name="s" id="s" value="Enter your search">
+				    </div>
+				    <input type="button" id="searchSubmit" value="" id="search">
+				</fieldset>
+			    </div>
+			  </div>
+			  <div style="clear:both;"></div>
+			</div>
+			<div id="content">
+				<div class="inner-content">
+					<div class="portfolio-page">
+						<span style="display:none;" id="type">new</span>
+						<span style="display:none;" id="ui">0</span>
+						<span style="display:none;" id="uic">0</span>
+						<div class="items" style="opacity:0;">
+						</div>
+					</div>
+				</div>
+				<div style="padding-top:20px;text-align:center;"><div id="get_more" ></div><img id="get_more_img" src="/static/images/preloader.gif"/></div>
+			</div>
+		</div>
+		<div class="preloader"></div>
+		<div id="modal" style="display:none;">
+			<div style="padding-top:10px;text-align:center;">
+			<a id="c_inv" href="javascript:void(0)" style="display: block;text-align:right;padding-right:10px;font-weight:bold;color:white;">close</a>
+			<label style="">Invite your FACEBOOK FRIENDS!</label>
+			<input id="s_fr" type="text" onkeyup="s_fbf()" placeholder="Find friends..." style="
+			    display: block;
+			    margin-left: 30px;
+			    width: 332px;
+			    margin-top: 10px;
+			"/>
+			</div>
+			<div id="modal_body"></div>
+			<!--<a href="javascript:void(0)" id="b_ifb" style="
+			    display: block;
+			    margin-top: 20px;
+			    background-color: white;
+			    color:#E33;
+			    padding:8px 0;
+			    text-align: center;
+			    font-weight: bold;
+			    margin:10px 20px;
+			">SEND INVITATION</a>-->
+			<div style="text-align: center;margin-top: 10px;">
+				<fb:login-button size="large" login_text="SEND INVITATION" scope="publish_actions" onlogin="checkLoginState();"></fb:login-button>
+			</div>
+			<div style="width: 100%;background-color: #C11;display: block;padding:10px 0;margin-top: 15px;text-align: center;font-weight: bold;">YOU GOT <label id="n_ff">0</label> INVITATIONS</div>
+		</div>
+		<script type="text/javascript" src="/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.migrate.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.js"></script>
+	  	<script type="text/javascript" src="/js/isotope.pkgd.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.color.js"></script>
+		<script type="text/javascript" src="/js/search_in.js"></script>
+		<script type="text/javascript" src="/js/load_async.js"></script>
+		<script type="text/javascript" src="/js/jquery.easy-confirm-dialog.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			mixpanel.track("view page",{"url":location.pathname});
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				
+			ga('create','UA-55810606-1','auto');
+			ga('send','pageview');
+			$('#c_inv').click(function(){$(this).parent().parent().hide();});
+			mixpanel.track_links("#ju_pl","register intent",{
+		        "referrer":document.referrer
+		    });
+		});
+	  </script>
+	</body>
+</html>

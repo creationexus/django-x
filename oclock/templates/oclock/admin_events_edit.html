@@ -1,0 +1,17 @@
+<form id="{{ e.0 }}" class="form" action="/admin/events/edit/{{ e.0 }}/" method="post">
+<label for="tit" style="display:block;">T&iacute;tulo</label>
+<input type="text" id="tit" name="tit" value="{{ e.1 }}"/>
+<label for="sort" style="display:block;">Orden</label>
+<input type="text" id="sort" name="sort" value="{{ e.24 }}"/>
+<label for="cc" style="display:block;">Pa&iacute;s</label>
+<select id="cc" name="cc">
+	{% for key,val in op.items %}
+		{% if key == e.22 %}
+			<option value="{{ key }}" selected="selected">{{ val }}</option>
+		{% else %}
+			<option value="{{ key }}">{{ val }}</option>
+		{% endif %}
+	{% endfor %}
+</select>
+<div style="text-align: center;"><input type="submit" value="Enviar"></div>
+</form>
